@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gerejas', function (Blueprint $table) {
+        Schema::create('jadwal_ibadahs', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nama_gereja');
-            $table->string('wilayah_id')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('tempat_ibadah');
+            $table->string('petugas_ibadah');
+            $table->string('pelayan_firman');
+            $table->string('doa_syafaat');
+            $table->string('doa_syukur');
             $table->mediumText('keterangan')->nullable();
 
-            $table->string('nama_pengguna')->nullable();
-            $table->string('kata_sandi')->nullable();
-
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gerejas');
+        Schema::dropIfExists('jadwal_ibadahs');
     }
 };

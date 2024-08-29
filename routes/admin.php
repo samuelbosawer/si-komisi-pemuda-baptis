@@ -5,11 +5,38 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\DashboardController;
 
-Route::group(['middleware' => ['role:admin', 'auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->name('admin.')->group(function () {
 
         // Dashboard
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+
+
+
+            require_once 'admin/pemuda.php';
+            require_once 'admin/galeri.php';
+            require_once 'admin/gereja.php';
+            require_once 'admin/jadwal.php';
+            require_once 'admin/kegiatan.php';
+            require_once 'admin/pengumuman.php';
+            require_once 'admin/wilayah.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // Mahasiswa

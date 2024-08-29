@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('galeris', function (Blueprint $table) {
             $table->id();
+
+            $table->string('foto')->nullable();
+            $table->string('judul');
+            $table->mediumText('keterangan')->nullable();
+
             $table->timestamps();
         });
     }

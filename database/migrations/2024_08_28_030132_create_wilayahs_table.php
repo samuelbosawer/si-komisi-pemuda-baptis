@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('wilayahs', function (Blueprint $table) {
             $table->id();
+
+            $table->string('nama_wilayah');
+            $table->string('kode_wilayah')->nullable();
+            $table->mediumText('keterangan')->nullable();
+
             $table->timestamps();
         });
     }

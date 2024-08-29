@@ -112,7 +112,7 @@
 
 
         <footer class="footer footer-alt">
-            <script>document.write(new Date().getFullYear())</script> &copy; {{$pengaturan->nama_web ?? ''}}</a>
+            <script>document.write(new Date().getFullYear())</script> &copy; Sistem Informasi Pemuda Baptis Papua
         </footer>
 
         <!-- Vendor js -->

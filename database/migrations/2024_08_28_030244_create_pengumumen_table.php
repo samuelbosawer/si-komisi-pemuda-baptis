@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('pengumumen', function (Blueprint $table) {
             $table->id();
+
+            $table->string('judul');
+            $table->mediumText('keterangan')->nullable();
+
             $table->timestamps();
         });
     }
