@@ -4,7 +4,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                              <script>document.write(new Date().getFullYear())</script> &copy; Copyrigt <a href="/">  Sistem Informasi Pendataan Mahasiswa </a>
+                              <script>document.write(new Date().getFullYear())</script> &copy; Copyrigt <a href="/">  Sistem Informasi Pemuda Baptis Papua </a>
                             </div>
                             <div class="col-md-6">
                                 <!-- <div class="text-md-right footer-links d-none d-sm-block">
