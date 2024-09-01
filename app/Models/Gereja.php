@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Gereja extends Model
 {
     use HasFactory;
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
+
+    }
 }

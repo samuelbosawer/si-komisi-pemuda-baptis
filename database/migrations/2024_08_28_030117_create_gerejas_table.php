@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->mediumText('keterangan')->nullable();
 
-            $table->string('nama_pengguna')->nullable();
-            $table->string('kata_sandi')->nullable();
+            // $table->string('nama_pengguna')->nullable();
+            // $table->string('kata_sandi')->nullable();
 
             $table->timestamps();
         });
