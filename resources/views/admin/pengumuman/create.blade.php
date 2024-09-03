@@ -1,6 +1,6 @@
 @extends('admin.layout.tamplate')
 @section('title')
-    Wilayah
+    Pengumuman
 @endsection
 @section('content')
     <!-- ============================================================== -->
@@ -19,15 +19,15 @@
                     <div class="col-12 ">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title"> {{ $caption ?? 'Tambah Data Wilayah' }} </h4>
+                                <h4 class="header-title"> {{ $caption ?? 'Tambah Data Pengumuman' }} </h4>
 
 
                                 @if (Request::segment(4) == 'ubah')
-                                    <form action="{{ route('admin.wilayah.update', $data->id) }}" method="post"
+                                    <form action="{{ route('admin.pengumuman.update', $data->id) }}" method="post"
                                         enctype="multipart/form-data">
                                         @method('PUT')
                                     @else
-                                        <form action="{{ route('admin.wilayah.store') }}" method="post"
+                                        <form action="{{ route('admin.pengumuman.store') }}" method="post"
                                             enctype="multipart/form-data">
                                 @endif
                                 @csrf
@@ -36,40 +36,54 @@
                                         <div class="card-box">
                                             <div class="row">
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-12">
                                                     <div class="form-group mb-3">
-                                                        <label for="nama_wilayah"> Nama Wilayah <span
+                                                        <label for="judul"> Judul <span
                                                                 class="text-danger">*</span> </label>
-                                                        <input type="text" id="nama_wilayah"
+                                                        <input type="text" id="judul"
                                                             @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif
-                                                            value="{{ old('nama_wilayah') ?? ($data->nama_wilayah ?? '') }}"
-                                                            name="nama_wilayah" placeholder="" class="form-control">
-                                                        @if ($errors->has('nama_wilayah'))
+                                                            value="{{ old('judul') ?? ($data->judul ?? '') }}"
+                                                            name="judul" placeholder="" class="form-control">
+                                                        @if ($errors->has('judul'))
                                                             <label class="text-danger">
-                                                                {{ $errors->first('nama_wilayah') }}
+                                                                {{ $errors->first('judul') }}
                                                             </label>
                                                         @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label for="kode_wilayah"> Kode Wilayah <span class="text-danger">
-                                                            </span> </label>
-                                                        <input type="text" id="kode_wilayah"
+                                                        <label for="mulai"> Tanggal Mulai <span
+                                                                class="text-danger">*</span> </label>
+                                                        <input type="date" id="mulai"
                                                             @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif
-                                                            value="{{ old('kode_wilayah') ?? ($data->kode_wilayah ?? '') }}"
-                                                            name="kode_wilayah" placeholder="" class="form-control">
-                                                        @if ($errors->has('kode_wilayah'))
+                                                            value="{{ old('mulai') ?? ($data->mulai ?? '') }}"
+                                                            name="mulai" placeholder="" class="form-control">
+                                                        @if ($errors->has('mulai'))
                                                             <label class="text-danger">
-                                                                {{ $errors->first('kode_wilayah') }}
+                                                                {{ $errors->first('mulai') }}
+                                                            </label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label for="selesai"> Tanggal Selesai <span
+                                                                class="text-danger">*</span> </label>
+                                                        <input type="date" id="selesai"
+                                                            @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif
+                                                            value="{{ old('selesai') ?? ($data->selesai ?? '') }}"
+                                                            name="selesai" placeholder="" class="form-control">
+                                                        @if ($errors->has('selesai'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('selesai') }}
                                                             </label>
                                                         @endif
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-md-8">
+                                                <div class="col-md-12">
                                                     <div class="form-group mb-3">
                                                         <label for="keterangan"> Keterangan </label>
                                                         <textarea id="keterangan" @if (Request::segment(3) == 'detail') disabled @endif name="keterangan"
@@ -89,9 +103,9 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('admin.wilayah') }}">Kembali</a>
+                                                            href="{{ route('admin.pengumuman') }}">Kembali</a>
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('admin.wilayah.ubah', $data->id) }}">Ubah <i
+                                                            href="{{ route('admin.pengumuman.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
                                                     </div>
                                                 </div>

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('judul');
+            $table->date('mulai')->nullable();
+            $table->date('selesai')->nullable();
             $table->mediumText('keterangan')->nullable();
-
             $table->timestamps();
         });
     }
