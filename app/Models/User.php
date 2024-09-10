@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
+
+    }
+
+    public function gereja()
+    {
+        return $this->belongsTo(Gereja::class, 'gereja_id', 'id');
+
+    }
 }

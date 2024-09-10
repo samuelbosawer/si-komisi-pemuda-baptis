@@ -70,31 +70,16 @@
                         </a>
                     </li>
 
-                    <li class="menu-title mt-2">PENGATURAN</li>
+                    <li class="menu-title mt-2">AKUN</li>
 
                     <li>
-                        <a href="{{ url('admin/jurusan') }}">
+                        <a href="{{ url('admin/pengguna') }}">
                             <i data-feather="settings"></i>
                             <span> Pengguna </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="{{ url('admin/jurusan') }}">
-                            <i data-feather="globe"></i>
-                            <span> Informasi Situs </span>
-                        </a>
-                    </li>
 
-                    <li class="menu-title mt-2">Laporan</li>
-
-
-                    <li>
-                        <a href="{{ url('admin/jurusan') }}">
-                            <i data-feather="file-text"></i>
-                            <span> Laporan </span>
-                        </a>
-                    </li>
                     <li class="menu-title mt-2">Logout</li>
                      <li>
                         <a href="{{ route('logout') }}"

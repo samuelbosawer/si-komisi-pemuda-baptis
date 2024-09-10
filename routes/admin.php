@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
             require_once 'admin/kegiatan.php';
             require_once 'admin/pengumuman.php';
             require_once 'admin/wilayah.php';
+            require_once 'admin/pengguna.php';
 
 
 

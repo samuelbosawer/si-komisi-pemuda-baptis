@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa;
-use App\Models\Jurusan;
-
+use App\Models\Pemuda;
+use App\Models\Wilayah;
+use App\Models\Gereja;
 
 class DashboardController extends Controller
 {
     public function index()
     {
 
-        $jurusan = Jurusan::get()->count();
-        $mahasiswa = Mahasiswa::get()->count();
 
-        // gender
-        $pria = Mahasiswa::where('jenis_kelamin','pria')->count();
-        $wanita = Mahasiswa::where('jenis_kelamin','wanita')->count();
+        // pemuda
+        $pria = Pemuda::where('jenis_kelamin','Laki-Laki')->count();
+        $wanita = Pemuda::where('jenis_kelamin','Wanita')->count();
+        $pemuda = Pemuda::count();
 
-        // jurusan
-        $jurusanMahasiswa = Jurusan::with('mahasiswas')->get();
 
-        return view('admin.dashboard.index',compact('jurusan','mahasiswa','pria','wanita','jurusanMahasiswa'));
+        $wilayah = Wilayah::count();
+        $gereja = Gereja::count();
+
+
+        return view('admin.dashboard.index',compact('pemuda','pria','wanita','wilayah','gereja'));
     }
 
 
