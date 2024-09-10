@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->mediumText('keterangan')->nullable();
+            $table->timestamp('tanggal_kegiatan')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

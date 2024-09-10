@@ -33,13 +33,14 @@
 
                             <div class="card-body p-4">
 
-                                <div class="text-center w-75 m-auto">
+                                <div class="text-center w-100 m-auto">
                                     <div class="auth-logo">
                                         <a href="#" class="logo logo-dark text-center">
                                             <h5 class="logo-lg">
                                                 <img src="/assets/images/logo.png" class="img-fluid" alt="" srcset="">
                                                Sistem Informasi Pemuda Baptis Papua
                                             </h5>
+                                            <p class="text-dark">Tingkat Wilayah Jayapura, Kerrom dan Yahukomi</p>
                                         </a>
 
                                         <a href="#" class="logo logo-light text-center">
@@ -47,6 +48,7 @@
                                                 <img src="/assets/images/logo.png" class="img-fluid" alt="" srcset="">
                                                Sistem Informasi Pemuda Baptis Papua
                                             </h5>
+                                            <p class="text-dark">Tingkat Wilayah Jayapura, Kerrom dan Yahukomi</p>
                                         </a>
                                     </div>
                                     <p class="text-muted mb-4 mt-3">Masukan email dan password untuk login. </p>
@@ -114,6 +116,7 @@
         <footer class="footer footer-alt">
             <script>document.write(new Date().getFullYear())</script> &copy; Sistem Informasi Pemuda Baptis Papua
         </footer>
+        <p>Tingkat Wilayah Jayapura, Kerrom dan Yahukomi</p>
 
         <!-- Vendor js -->
         <script src="/assets/js/vendor.min.js"></script>

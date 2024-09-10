@@ -94,7 +94,7 @@
                 <div class="logo-box">
                     <a href="{{ url('/admin/dashboard') }}" class="logo logo-dark text-center">
                         <span class="logo-sm">
-                            <label class="text-white">SIPM</label>
+                            <label class="text-white">SIPBP</label>
 
                         </span>
                         <span class="logo-lg">

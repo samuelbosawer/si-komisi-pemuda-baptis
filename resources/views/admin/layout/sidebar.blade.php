@@ -15,16 +15,17 @@
                          </a>
                      </li>
 
-                     <li class="menu-title mt-2">PEMUDA</li>
+
+
+                     <li class="menu-title mt-2">DATA MASTER</li>
 
 
                      <li>
-                         <a href="{{ route('admin.pemuda') }}">
-                             <i data-feather="users"></i>
-                             <span> Data Pemuda </span>
-                         </a>
-                     </li>
-                     <li class="menu-title mt-2">DATA MASTER</li>
+                        <a href="{{ route('admin.pemuda') }}">
+                            <i data-feather="users"></i>
+                            <span> Data Pemuda </span>
+                        </a>
+                    </li>
 
                      <li>
                         <a href="{{ route('admin.wilayah') }}">
