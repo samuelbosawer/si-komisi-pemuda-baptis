@@ -115,7 +115,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('admin.wilayah') }}">Kembali</a>
+                                                            href="{{ route('admin.galeri') }}">Kembali</a>
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.galeri.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
