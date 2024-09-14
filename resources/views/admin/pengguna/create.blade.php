@@ -36,7 +36,24 @@
                                         <div class="card-box">
                                             <div class="row">
 
-                                                <div class="col-md-5">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label for="name"> Name <span
+                                                                class="text-danger">*</span> </label>
+                                                        <input type="text" id="name"
+                                                            @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif
+                                                            value="{{ old('name') ?? ($data->name ?? '') }}"
+                                                            name="name" placeholder="" class="form-control">
+                                                        @if ($errors->has('name'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('name') }}
+                                                            </label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label for="email"> Email <span
                                                                 class="text-danger">*</span> </label>
@@ -52,22 +69,24 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="form-group mb-3">
                                                         <label for="role"> Role <span class="text-danger">*</span>
                                                         </label>
                                                         <select name="role" id="" class="form-control"
                                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                                             <option value="" hidden> Pilih Role </option>
+
                                                             @foreach ($role as $r)
                                                                 @if ($r->id == old('role'))
-                                                                    <option selected value="{{ $r->id }}">
-                                                                        {{ $r->name }}</option>
-                                                                @elseif (isset($data) && $r->id == $data->role)
-                                                                    <option selected value="{{ $r->id }}">
+                                                                    <option selected value="{{ $r->name }}">
+                                                                        {{ $r->name }}  </option>
+
+                                                                @elseif (isset($data) && $r->name == $data->roles->pluck('name'))
+                                                                    <option selected value="{{ $r->name }}">
                                                                         {{ $r->name }}</option>
                                                                 @else
-                                                                    <option value="{{ $r->id }}">
+                                                                    <option value="{{ $r->name }}">
                                                                         {{ $r->name }}</option>
                                                                 @endif
                                                             @endforeach
@@ -80,28 +99,26 @@
                                                         @endif
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="form-group mb-3">
                                                         <label for="wilayah_id"> Wilayah <span class="text-danger">*</span>
                                                         </label>
-                                                        <select name="wilayah_id" id="" class="form-control"
-                                                            @if (Request::segment(3) == 'detail') disabled @endif>
+                                                        <select name="wilayah_id" id="wilayah" class="form-control"
+                                                            @if (Request::segment(3) == 'detail') disabled @endif
+                                                          >
                                                             <option value="" hidden> Pilih Wilayah </option>
-                                                            @foreach ($gereja as $g)
-                                                                @if ($g->id == old('wilayah_id'))
-                                                                    <option selected value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
-                                                                @elseif (isset($data) && $g->id == $data->wilayah_id)
-                                                                    <option selected value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
+                                                            @foreach ($wilayah as $w)
+                                                                @if ($w->id == old('wilayah_id'))
+                                                                    <option selected value="{{ $w->id }}">
+                                                                        {{ $w->nama_wilayah }}</option>
+                                                                @elseif (isset($data) && $w->id == $data->wilayah_id)
+                                                                    <option selected value="{{ $w->id }}">
+                                                                        {{ $w->nama_wilayah }}</option>
                                                                 @else
-                                                                    <option value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
+                                                                    <option value="{{ $w->id }}">
+                                                                        {{ $w->nama_wilayah }}</option>
                                                                 @endif
                                                             @endforeach
-
-
                                                         </select>
                                                         @if ($errors->has('wilayah_id'))
                                                             <label class="text-danger">
@@ -110,27 +127,18 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="form-group mb-3">
                                                         <label for="gereja_id"> Gereja <span class="text-danger">*</span>
                                                         </label>
-                                                        <select name="gereja_id" id="" class="form-control"
+                                                        <select name="gereja_id" id="gereja" class="form-control"
                                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                                             <option value="" hidden> Pilih Gereja </option>
                                                             @foreach ($gereja as $g)
-                                                                @if ($g->id == old('gereja_id'))
-                                                                    <option selected value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
-                                                                @elseif (isset($data) && $g->id == $data->gereja_id)
-                                                                    <option selected value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
-                                                                @else
-                                                                    <option value="{{ $g->id }}">
-                                                                        {{ $g->nama_gereja }}</option>
-                                                                @endif
+                                                                <option value="{{ $g->id }}"
+                                                                    @if (old('gereja_id') == $g->id || (isset($data) && $data->gereja_id == $g->id)) {{ 'selected' }} @endif>
+                                                                    {{ $g->nama_gereja }}</option>
                                                             @endforeach
-
-
                                                         </select>
                                                         @if ($errors->has('gereja_id'))
                                                             <label class="text-danger">
@@ -139,7 +147,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-5">
+                                                <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label for="password" class="form-label"> Password <span class="text-danger">*</span></label>
                                                         <input type="password" name="password" id="password"  placeholder="" class="form-control">
@@ -151,7 +159,7 @@
                                                     </div>
                                                     <!-- input group end -->
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label for="password_confirmation" class="form-label">Confirmation Password <span class="text-danger">*</span></label>
                                                         <input type="password" name="password_confirmation" id="password_confirmation"  placeholder="" class="form-control">
@@ -204,13 +212,7 @@
 
                                 </div> <!-- end card-box-->
                             </div> <!-- end col -->
-                        </div>
-                        <!-- end row -->
-                        </form>
-
-
-
-
+                        </div> <!-- end card-->
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col -->
@@ -227,17 +229,40 @@
 @endsection
 
 @push('script-footer')
-    <script src="/assets/js/pages/form-fileuploads.init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         $(document).ready(function(e) {
-            $('#images').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-images').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
+
+            function fetchGerejaByWilayah() {
+                console.info()
+            }
+        });
+
+
+        $(document).ready(function() {
+            // Load wilayah on page load
+            $.get('/admin/pengguna/get-gereja-by-wilayah/', function(wilayahs) {
+                wilayahs.forEach(function(wilayah) {
+                    $('#wilayah').append(new Option(wilayah.nama_wilayah, wilayah.id));
+                });
             });
 
+            // Ketika wilayah diubah
+            $('#wilayah').on('change', function() {
+                var wilayahId = $(this).val();
+
+                // Hapus data gereja sebelumnya
+                $('#gereja').empty().append(new Option('Pilih Gereja', ''));
+
+                if (wilayahId) {
+                    // Ambil data gereja berdasarkan wilayah_id
+                    $.get('/admin/pengguna/get-gereja-by-gereja/' + wilayahId, function(gerejas) {
+                        gerejas.forEach(function(gereja) {
+                            $('#gereja').append(new Option(gereja.nama_gereja, gereja.id));
+                        });
+                    });
+                }
+            });
         });
     </script>
 @endpush

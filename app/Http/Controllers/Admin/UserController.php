@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -40,12 +40,57 @@ class UserController extends Controller
         return view('admin.pengguna.create',compact('wilayah','gereja','role'));
     }
 
+    public function getWIlayah($id)
+    {
+        $wilayahs = Wilayah::all();
+        return response()->json($wilayahs);
+    }
+
+    public function getGerejas($wilayah_id)
+    {
+        $gerejas = Gereja::where('wilayah_id', $wilayah_id)->get();
+        return response()->json($gerejas);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                // 'phone' => 'required|unique:users,phone|max:13',
+                'email' => 'required|unique:users,email|string',
+                // 'date_of_birth' => 'required',
+                'wilayah_id' => 'required',
+                'gereja_id' => 'required',
+                'name' => 'required',
+                'password'  => 'required|confirmed|min:8',
+                'password_confirmation' => 'required_with:password|same:password|min:8'
+            ],
+            [
+                'email.required' => 'Tidak boleh kosong',
+                'email.unique' => 'Email sudah terdaftar',
+                'wilayah_id.required' => 'Tidak boleh kosong',
+                'name.required' => 'Tidak boleh kosong',
+                'gereja_id.required' => 'Tidak boleh kosong',
+                'gereja_id.required' => 'Tidak boleh kosong',
+                'password.required' => 'Tidak boleh kosong',
+                'password.confirmed' => 'Password tidak sama',
+            ]
+        );
+        $data = new User();
+
+        $data->email   = $request->email;
+        $data->wilayah_id   = $request->wilayah_id;
+        $data->gereja_id   = $request->gereja_id;
+        $data->password   = $request->password;
+        $data->name   = $request->name;
+        $data->assignRole($request->role);
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.pengguna');
     }
 
     /**
@@ -53,7 +98,12 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $wilayah = Wilayah::get();
+        $gereja = Gereja::get();
+        $role = Role::get();
+        $caption = 'Detail Data Pengguna';
+        $data = User::where('id',$id)->first();
+        return view('admin.pengguna.create',compact('wilayah','gereja','role','caption','data'));
     }
 
     /**
@@ -61,7 +111,12 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $wilayah = Wilayah::get();
+        $gereja = Gereja::get();
+        $role = Role::get();
+        $caption = 'Detail Data Pengguna';
+        $data = User::where('id',$id)->first();
+        return view('admin.pengguna.create',compact('wilayah','gereja','role','caption','data'));
     }
 
     /**
@@ -69,7 +124,39 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                // 'phone' => 'required|unique:users,phone|max:13',
+                'email' => 'required|string',
+                // 'date_of_birth' => 'required',
+                'wilayah_id' => 'required',
+                'gereja_id' => 'required',
+                'name' => 'required',
+                'password'  => 'confirmed',
+                'password_confirmation' => 'same:password'
+            ],
+            [
+                'email.required' => 'Tidak boleh kosong',
+                'wilayah_id.required' => 'Tidak boleh kosong',
+                'name.required' => 'Tidak boleh kosong',
+                'gereja_id.required' => 'Tidak boleh kosong',
+                'gereja_id.required' => 'Tidak boleh kosong',
+                'password.required' => 'Tidak boleh kosong',
+                'password.confirmed' => 'Password tidak sama',
+            ]
+        );
+        $data = User::find($id);
+
+        $data->email   = $request->email;
+        $data->wilayah_id   = $request->wilayah_id;
+        $data->gereja_id   = $request->gereja_id;
+        $data->password   = $request->password;
+        $data->name   = $request->name;
+        $data->assignRole($request->role);
+
+        $data->update();
+        alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.pengguna');
     }
 
     /**
@@ -77,6 +164,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 }

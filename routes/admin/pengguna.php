@@ -14,5 +14,8 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('pengguna/{id}/ubah', [UserController::class, 'edit'])->name('pengguna.ubah');
         Route::put('pengguna/{id}', [UserController::class, 'update'])->name('pengguna.update');
         Route::get('pengguna/excel', [UserController::class, 'excel'])->name('pengguna.excel');
+
+        Route::get('pengguna/get-gereja-by-wilayah/', [UserController::class, 'getWIlayah'])->name('pengguna.getWIlayah');
+        Route::get('pengguna/get-gereja-by-gereja/{id}', [UserController::class, 'getGerejas'])->name('pengguna.getGerejas');
     });
 });

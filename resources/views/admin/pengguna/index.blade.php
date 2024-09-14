@@ -28,7 +28,7 @@
                                     <div class="">
                                         <a class="btn btn-dark" href="{{ route('admin.pengguna.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
-                                        {{-- <a class="btn btn-success" href="{{route('admin.wilayah.excel')}}">Cetak Excel <i data-feather="printer"></i></a> --}}
+                                        <a class="btn btn-success" href="{{route('admin.wilayah.excel')}}">Cetak Excel <i data-feather="printer"></i></a>
                                     </div>
                                 </div>
 
