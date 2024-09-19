@@ -28,8 +28,8 @@
                                     <div class="">
                                         <a class="btn btn-dark" href="{{ route('admin.pengumuman.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
-                                        {{-- <a class="btn btn-success" href="{{route('admin.wilayah.excel')}}">Cetak Excel <i data-feather="printer"></i></a> --}}
-                                    </div>
+                                                <a class="btn btn-success" href="{{route('admin.pengumuman.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
+                                                <a class="btn btn-danger" href="{{route('admin.pengumuman.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                 </div>
 
                                 <div class="mt-3 table-responsive">
@@ -51,7 +51,7 @@
                                                     {{ $data->keterangan }}
                                                 </td>
                                                 <td>
-                                                    {{ $data->mulai  .' - '. $data->selesai }}
+                                                    {{ strftime('%d %B %Y', strtotime($data->mulai))  .' - '.  strftime('%d %B %Y', strtotime($data->selesai)) }}
                                                 </td>
 
 

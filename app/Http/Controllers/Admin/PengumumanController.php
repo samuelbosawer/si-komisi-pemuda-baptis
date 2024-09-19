@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 
+use App\Exports\PengumumanExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 class PengumumanController extends Controller
 {
     /**
@@ -19,9 +23,6 @@ class PengumumanController extends Controller
                 if (($s = $request->s)) {
                     $query->orWhere('judul', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
-                        // ->orWhereHas('gereja', function ($subQuery) use ($s) {
-                            // $subQuery->where('nama_gereja', 'LIKE', '%' . $s . '%');
-                        // });
                 }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
@@ -125,5 +126,28 @@ class PengumumanController extends Controller
         $data = Pengumuman::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Pengumuman::where(function ($query) use ($search) {
+                $query->Where('judul', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA PENGUMUMAN'];
+        $doc = 'data-gereja.pdf';
+        $pdf = PDF::loadView('admin.pengumuman.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  PengumumanExport($request), 'data-pengumuman.xlsx');
     }
 }
