@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Wilayah;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
-use App\Exports\PemudasExport;
 use App\Exports\WilayahExport;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Gereja;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
+use App\Exports\GerejaExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GerejaController extends Controller
 {
@@ -127,6 +130,33 @@ class GerejaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Gereja::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Gereja::where(function ($query) use ($search) {
+                $query->Where('nama_gereja', 'LIKE', '%' . $search . '%')
+                    ->orWhere('alamat', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA GEREJA'];
+        $doc = 'data-gereja.pdf';
+        $pdf = PDF::loadView('admin.gereja.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  GerejaExport($request), 'data-gereja.xlsx');
     }
 }

@@ -17,7 +17,7 @@ class WilayahExport implements FromCollection, WithHeadings, WithMapping, WithSt
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->no = 1;
+        $this->no = 0;
     }
 
     /**
