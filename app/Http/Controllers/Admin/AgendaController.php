@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AgendasExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AgendaKegiatan as Agenda;
+
+use App\Exports\PengumumanExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AgendaController extends Controller
 {
@@ -130,4 +135,30 @@ class AgendaController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Agenda::where(function ($query) use ($search) {
+                $query->Where('judul', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%')
+                    ->orWhere('tanggal_kegiatan', 'LIKE', '%' . $search . '%')
+                    ->orWhere('status', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA AGENDA KEGIATAN'];
+        $doc = 'data-agenda.pdf';
+        $pdf = PDF::loadView('admin.agenda.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  AgendasExport($request), 'data-agenda.xlsx');
+    }
+
 }

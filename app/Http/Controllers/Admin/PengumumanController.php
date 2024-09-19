@@ -22,7 +22,9 @@ class PengumumanController extends Controller
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
                     $query->orWhere('judul', 'LIKE', '%' . $s . '%')
-                        ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
+                    ->orWhere('mulai', 'LIKE', '%' . $s . '%')
+                    ->orWhere('selesai', 'LIKE', '%' . $s . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
                 }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
@@ -133,14 +135,16 @@ class PengumumanController extends Controller
         $search = $request->s;
         $all = Pengumuman::where(function ($query) use ($search) {
                 $query->Where('judul', 'LIKE', '%' . $search . '%')
-                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%')
+                    ->orWhere('mulai', 'LIKE', '%' . $search . '%')
+                    ->orWhere('selesai', 'LIKE', '%' . $search . '%');
             })
             ->orderBy('id', 'desc')
             ->get();
 
         $datas = ['datas' => $all];
         $title = ['title' => 'DATA PENGUMUMAN'];
-        $doc = 'data-gereja.pdf';
+        $doc = 'data-pengumuman.pdf';
         $pdf = PDF::loadView('admin.pengumuman.pdf', $datas, $title);
         return $pdf->download($doc);
 
