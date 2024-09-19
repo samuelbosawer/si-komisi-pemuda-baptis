@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('galeri/{id}/ubah', [GaleriController::class, 'edit'])->name('galeri.ubah');
         Route::put('galeri/{id}', [GaleriController::class, 'update'])->name('galeri.update');
         Route::get('galeri/excel', [GaleriController::class, 'excel'])->name('galeri.excel');
+        Route::get('galeri/pdf', [GaleriController::class, 'pdf'])->name('galeri.pdf');
     });
 });

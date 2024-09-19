@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('pengumuman/{id}/ubah', [PengumumanController::class, 'edit'])->name('pengumuman.ubah');
         Route::put('pengumuman/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
         Route::get('pengumuman/excel', [PengumumanController::class, 'excel'])->name('pengumuman.excel');
+        Route::get('pengumuman/pdf', [PengumumanController::class, 'pdf'])->name('pengumuman.pdf');
     });
 });

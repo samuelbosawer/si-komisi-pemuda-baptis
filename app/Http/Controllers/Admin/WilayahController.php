@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Wilayah;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use App\Exports\PemudasExport;
+use App\Exports\WilayahExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WilayahController extends Controller
 {
@@ -111,5 +115,32 @@ class WilayahController extends Controller
         $data = Wilayah::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Wilayah::where(function ($query) use ($search) {
+                $query->Where('nama_wilayah', 'LIKE', '%' . $search . '%')
+                    ->orWhere('kode_wilayah', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA WILAYAH'];
+        $doc = 'data-wilayah.pdf';
+        $pdf = PDF::loadView('admin.wilayah.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+        // $datas = Pemuda::get();
+        // $title = 'DATA PEMUDA';
+        // return view('admin.pemuda.pdf',compact('datas','title'));
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  WilayahExport($request), 'data-wilayah.xlsx');
     }
 }

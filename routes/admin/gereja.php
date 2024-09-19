@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('gereja/{id}/ubah', [GerejaController::class, 'edit'])->name('gereja.ubah');
         Route::put('gereja/{id}', [GerejaController::class, 'update'])->name('gereja.update');
         Route::get('gereja/excel', [GerejaController::class, 'excel'])->name('gereja.excel');
+        Route::get('gereja/pdf', [GerejaController::class, 'pdf'])->name('gereja.pdf');
     });
 });

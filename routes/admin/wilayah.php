@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('wilayah/{id}/ubah', [WilayahController::class, 'edit'])->name('wilayah.ubah');
         Route::put('wilayah/{id}', [WilayahController::class, 'update'])->name('wilayah.update');
         Route::get('wilayah/excel', [WilayahController::class, 'excel'])->name('wilayah.excel');
+        Route::get('wilayah/pdf', [WilayahController::class, 'pdf'])->name('wilayah.pdf');
     });
 });

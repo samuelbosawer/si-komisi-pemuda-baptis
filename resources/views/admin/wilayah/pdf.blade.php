@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PDF - Data Pemuda</title>
+    <title>PDF - Data Wilayah</title>
     <style>
         table, tr, th,td {
             border: 1px solid black;
@@ -32,17 +32,12 @@
         <div class="row">
             <div class="">
                 <div class="">
-                    <table class="">
+                    <table class="" style="width: 100%">
                         <tr>
                             <th width="1%">No</th>
-                            {{-- <th>Foto</th> --}}
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>TTL</th>
-                            <th>Nomor HP</th>
-                            <th>Usia</th>
-                            <th>Alamat</th>
-                            <th>Gereja</th>
+                            <th>Nama Wilayah</th>
+                            <th>Kode Wilayah</th>
+                            <th>Keterangan</th>
                         </tr>
                         @php
                             $i = 0;
@@ -50,54 +45,27 @@
                         @forelse ($datas as $data)
                             <tr class="text-center">
                                 <td>{{ ++$i }}</td>
-                                {{-- <td class="" width="100px">
-                                    <img src="{{ asset($data->foto) }}" alt=""
-                                        class="">
-                                </td> --}}
+
                                 <td>
 
-                                        {{ $data->nama_depan . ' ' . $data->nama_belakang . ' ' . $data->belakang }}
+                                        {{ $data->nama_wilayah }}
                                 </td>
 
                                 <td>
                                     {{
-                                        $data->jenis_kelamin
+                                        $data->kode_wilayah
                                     }}
                                 </td>
+
+
 
 
                                 <td>
                                     {{
-                                        $data->tempat_lahir.', '.strftime('%d %B %Y', strtotime($data->tanggal_lahir));
-
+                                        $data->keterangan
                                     }}
                                 </td>
 
-
-                                <td>
-                                    {{
-                                        $data->nomor_hp
-                                    }}
-                                </td>
-
-
-                                <td>
-                                    {{
-                                        $data->usia
-                                    }}
-                                </td>
-
-
-                                <td>
-                                    {{
-                                        $data->alamat
-                                    }}
-                                </td>
-
-
-                                <td>
-                                    {{ $data->gereja->nama_gereja }}
-                                </td>
 
 
                             </tr>

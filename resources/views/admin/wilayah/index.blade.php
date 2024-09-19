@@ -28,7 +28,8 @@
                                     <div class="">
                                         <a class="btn btn-dark" href="{{ route('admin.wilayah.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
-                                        {{-- <a class="btn btn-success" href="{{route('admin.wilayah.excel')}}">Cetak Excel <i data-feather="printer"></i></a> --}}
+                                                <a class="btn btn-success" href="{{route('admin.wilayah.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
+                                                <a class="btn btn-danger" href="{{route('admin.wilayah.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
                                 </div>
 

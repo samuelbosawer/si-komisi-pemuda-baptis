@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('agenda/{id}/ubah', [AgendaController::class, 'edit'])->name('agenda.ubah');
         Route::put('agenda/{id}', [AgendaController::class, 'update'])->name('agenda.update');
         Route::get('agenda/excel', [AgendaController::class, 'excel'])->name('agenda.excel');
+        Route::get('agenda/pdf', [AgendaController::class, 'pdf'])->name('agenda.pdf');
     });
 });

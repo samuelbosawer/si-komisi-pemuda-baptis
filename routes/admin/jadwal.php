@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('jadwal/{id}/ubah', [JadwalController::class, 'edit'])->name('jadwal.ubah');
         Route::put('jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
         Route::get('jadwal/excel', [JadwalController::class, 'excel'])->name('jadwal.excel');
+        Route::get('jadwal/pdf', [JadwalController::class, 'pdf'])->name('jadwal.pdf');
     });
 });
