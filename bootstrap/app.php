@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+            'PDF' => Barryvdh\DomPDF\Facade::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

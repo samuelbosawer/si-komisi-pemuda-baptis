@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PemudasExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pemuda;
 use App\Models\Gereja;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use PDF;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PemudaController extends Controller
 {
@@ -16,7 +20,7 @@ class PemudaController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Pemuda::with('gereja')->where([
+        $query = Pemuda::with('gereja')->where([
             ['nama_depan', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -24,13 +28,13 @@ class PemudaController extends Controller
                         ->orWhere('nama_tengah', 'LIKE', '%' . $s . '%')
                         ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%')
                         ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%');
-                        // ->orWhereHas('gereja', function ($subQuery) use ($s) {
-                            // $subQuery->where('nama_gereja', 'LIKE', '%' . $s . '%');
-                        // });
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
-        return view('admin.pemuda.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
+        ]);
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
+
+        return view('admin.pemuda.index', compact('datas'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -203,5 +207,34 @@ class PemudaController extends Controller
         }
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Pemuda::with('gereja')->whereHas('gereja')
+            ->where(function ($query) use ($search) {
+                $query->Where('nama_depan', 'LIKE', '%' . $search . '%')
+                    ->orWhere('nama_tengah', 'LIKE', '%' . $search . '%')
+                    ->orWhere('nama_belakang', 'LIKE', '%' . $search . '%')
+                    ->orWhere('nomor_hp', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA PEMUDA'];
+        $doc = 'data-pemuda.pdf';
+        $pdf = PDF::loadView('admin.pemuda.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+        // $datas = Pemuda::get();
+        // $title = 'DATA PEMUDA';
+        // return view('admin.pemuda.pdf',compact('datas','title'));
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new PemudasExport($request), 'data-pemuda.xlsx');
     }
 }

@@ -95,7 +95,7 @@
                                     </table>
                                 </div>
                                 <!-- end .mt-4 -->
-                                {!! $datas->links() !!}
+                                {!! $datas->appends(['s' => request()->s])->links() !!}
 
 
                             </div> <!-- end card-body-->

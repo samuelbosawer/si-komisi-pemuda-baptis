@@ -14,5 +14,6 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::get('pemuda/{id}/ubah', [PemudaController::class, 'edit'])->name('pemuda.ubah');
         Route::put('pemuda/{id}', [PemudaController::class, 'update'])->name('pemuda.update');
         Route::get('pemuda/excel', [PemudaController::class, 'excel'])->name('pemuda.excel');
+        Route::get('pemuda/pdf', [PemudaController::class, 'pdf'])->name('pemuda.pdf');
     });
 });
