@@ -9,6 +9,11 @@ use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+
+use App\Exports\UsersExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -23,6 +28,7 @@ class UserController extends Controller
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
                     $query->orWhere('email', 'LIKE', '%' . $s . '%');
+                    $query->orWhere('name', 'LIKE', '%' . $s . '%');
                 }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
@@ -114,7 +120,7 @@ class UserController extends Controller
         $wilayah = Wilayah::get();
         $gereja = Gereja::get();
         $role = Role::get();
-        $caption = 'Detail Data Pengguna';
+        $caption = 'Ubah Data Pengguna';
         $data = User::where('id',$id)->first();
         return view('admin.pengguna.create',compact('wilayah','gereja','role','caption','data'));
     }
@@ -150,7 +156,13 @@ class UserController extends Controller
         $data->email   = $request->email;
         $data->wilayah_id   = $request->wilayah_id;
         $data->gereja_id   = $request->gereja_id;
-        $data->password   = $request->password;
+        if($request->password == null) {
+            $password = $data->password;
+        }else
+        {
+            $password = $request->password;
+        }
+        $data->password   = $password;
         $data->name   = $request->name;
         $data->assignRole($request->role);
 
@@ -167,5 +179,28 @@ class UserController extends Controller
         $data = User::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = User::where(function ($query) use ($search) {
+                $query->Where('email', 'LIKE', '%' . $search . '%')
+                    ->orWhere('name', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA PENGGUNA'];
+        $doc = 'data-pengguna.pdf';
+        $pdf = PDF::loadView('admin.pengguna.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new UsersExport($request), 'data-pengguna.xlsx');
     }
 }
