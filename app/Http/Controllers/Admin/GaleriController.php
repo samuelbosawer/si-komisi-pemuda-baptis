@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Galeri;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use App\Exports\GaleriExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GaleriController extends Controller
 {
@@ -156,5 +159,29 @@ class GaleriController extends Controller
         }
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Galeri::where(function ($query) use ($search) {
+                $query->Where('judul', 'LIKE', '%' . $search . '%')
+                    ->orWhere('foto', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA GALERI'];
+        $doc = 'data-galeri.pdf';
+        $pdf = PDF::loadView('admin.galeri.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  GaleriExport($request), 'data-galeri.xlsx');
     }
 }

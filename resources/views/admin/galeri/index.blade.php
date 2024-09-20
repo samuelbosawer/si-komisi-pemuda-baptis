@@ -28,7 +28,8 @@
                                     <div class="">
                                         <a class="btn btn-dark" href="{{ route('admin.galeri.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
-                                        {{-- <a class="btn btn-success" href="{{route('admin.galeri.excel')}}">Cetak Excel <i data-feather="printer"></i></a> --}}
+                                                <a class="btn btn-success" href="{{route('admin.galeri.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
+                                                <a class="btn btn-danger" href="{{route('admin.galeri.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
                                 </div>
 

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JadwalIbadah as Jadwal;
+use App\Exports\JadwalIbadahExport;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JadwalController extends Controller
 {
@@ -18,12 +21,12 @@ class JadwalController extends Controller
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
                     $query->orWhere('tempat_ibadah', 'LIKE', '%' . $s . '%')
-                        ->orWhere('petugas_ibadah', 'LIKE', '%' . $s . '%')
                         ->orWhere('pelayan_firman', 'LIKE', '%' . $s . '%')
                         ->orWhere('doa_syafaat', 'LIKE', '%' . $s . '%')
                         ->orWhere('doa_syukur', 'LIKE', '%' . $s . '%')
                         ->orWhere('status', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
+                        ->orWhere('tanggal', 'LIKE', '%' . $s . '%')
                         ->get();
                 }
             }]
@@ -152,5 +155,32 @@ class JadwalController extends Controller
         $data = Jadwal::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->s;
+        $all = Jadwal::where(function ($query) use ($search) {
+                $query->Where('tempat_ibadah', 'LIKE', '%' . $search . '%')
+                    ->orWhere('pelayan_firman', 'LIKE', '%' . $search . '%')
+                    ->orWhere('doa_syafaat', 'LIKE', '%' . $search . '%')
+                    ->orWhere('doa_syukur', 'LIKE', '%' . $search . '%')
+                    ->orWhere('status', 'LIKE', '%' . $search . '%')
+                    ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $datas = ['datas' => $all];
+        $title = ['title' => 'DATA JADWAL IBADAH'];
+        $doc = 'data-jadwal.pdf';
+        $pdf = PDF::loadView('admin.jadwal.pdf', $datas, $title);
+        return $pdf->download($doc);
+
+    }
+
+    public function excel(Request $request)
+    {
+        return Excel::download(new  JadwalIbadahExport($request), 'data-jadwal.xlsx');
     }
 }

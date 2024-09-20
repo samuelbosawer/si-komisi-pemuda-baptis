@@ -28,8 +28,8 @@
                                     <div class="">
                                         <a class="btn btn-dark" href="{{ route('admin.jadwal.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
-                                        {{-- <a class="btn btn-success" href="{{ route('admin.jadwal.excel') }}">Cetak Excel --}}
-                                            {{-- <i data-feather="printer"></i></a> --}}
+                                                <a class="btn btn-success" href="{{route('admin.jadwal.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
+                                                <a class="btn btn-danger" href="{{route('admin.jadwal.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
                                 </div>
 
@@ -46,7 +46,7 @@
                                         @forelse ($datas as $data)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
-                                                <td>{{$data->tanggal}}</td>
+                                                <td>{{strftime('%d %B %Y', strtotime($data->tanggal));}}</td>
                                                 <td>{{$data->tempat_ibadah}}</td>
                                                 <td>{{$data->pelayan_firman}}</td>
                                                 <td>{{$data->status}}</td>
