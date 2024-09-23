@@ -17,12 +17,12 @@ class PengumumanSeeder extends Seeder
             [
                 'id' => 1,
                 'judul' => 'Pengumuman 1',
-                'keterangan' => '',
+                'keterangan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam rerum dolor eius repellendus et dolorum. Dolorum aspernatur incidunt, impedit minus nemo dolore animi iure expedita, ipsam, saepe accusantium sit?',
             ],
             [
                 'id' => 2,
                 'judul' => 'Pengumuman 2',
-                'keterangan' => '',
+                'keterangan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam rerum dolor eius repellendus et dolorum. Dolorum aspernatur incidunt, impedit minus nemo dolore animi iure expedita, ipsam, saepe accusantium sit?',
             ]
         ])->each(function ($collection) {
             Pengumuman::create($collection);
