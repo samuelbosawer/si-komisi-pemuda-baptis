@@ -116,7 +116,7 @@
         <footer class="footer footer-alt">
             <script>document.write(new Date().getFullYear())</script> &copy; Sistem Informasi Pemuda Baptis Papua
         </footer>
-        <p>Tingkat Wilayah Jayapura, Kerrom dan Yahukomi</p>
+        <p>Tingkat Wilayah Jayapura, Keerom dan Yahukimo</p>
 
         <!-- Vendor js -->
         <script src="/assets/js/vendor.min.js"></script>

@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
-});
+// Route::get('/', function () {
+//     return redirect()->route('admin.dashboard');
+// });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Auth::routes();
