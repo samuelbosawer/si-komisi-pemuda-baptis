@@ -39,7 +39,7 @@
                                             <th width="1%">No</th>
                                             <th>Nama Gereja</th>
                                             <th>Wilayah</th>
-                                            {{-- <th>Alamat</th> --}}
+                                            <th>Jumlah Pemuda</th>
                                             <th></th>
                                         </tr>
                                         @forelse ($datas as $data)
@@ -49,10 +49,10 @@
                                                 <td>
                                                     {{ $data->wilayah->nama_wilayah }}
                                                 </td>
-{{--
+
                                                 <td>
-                                                    {{ $data->alamat }}
-                                                </td> --}}
+                                                    {{ $data->pemuda->count() }}
+                                                </td>
 
                                                 <td>
 

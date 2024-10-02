@@ -17,8 +17,9 @@ class GaleriSeeder extends Seeder
             [
                 'foto' => fake()->randomElement(
                     [
-                        '/gambar/mahasiswa/1.jpg',
-                        '/gambar/mahasiswa/2.jpg'
+
+                        '/gambar/galeri/2.jpg',
+                        '/gambar/galeri/1.jpg',
                     ]
                 ),
                 'id' => 1,
@@ -28,14 +29,72 @@ class GaleriSeeder extends Seeder
             [
                 'foto' => fake()->randomElement(
                     [
-                       '/gambar/mahasiswa/1.jpg',
-                       '/gambar/mahasiswa/2.jpg'
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
                     ]
                 ),
                 'id' => 2,
                 'judul' => 'galeri 2',
                 'keterangan' => '',
-            ]
+            ],
+            [
+                'foto' => fake()->randomElement(
+                    [
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
+                    ]
+                ),
+                'judul' => 'galeri 3',
+                'keterangan' => '',
+            ],
+            [
+                'foto' => fake()->randomElement(
+                    [
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
+                    ]
+                ),
+                'judul' => 'galeri 4',
+                'keterangan' => '',
+            ],
+            [
+                'foto' => fake()->randomElement(
+                    [
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
+                    ]
+                ),
+                'judul' => 'galeri 5',
+                'keterangan' => '',
+            ],
+            [
+                'foto' => fake()->randomElement(
+                    [
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
+                    ]
+                ),
+                'judul' => 'galeri 6',
+                'keterangan' => '',
+            ],
+
+            [
+                'foto' => fake()->randomElement(
+                    [
+
+                       '/gambar/galeri/2.jpg',
+                       '/gambar/galeri/1.jpg',
+                    ]
+                ),
+                'judul' => 'galeri 7',
+                'keterangan' => '',
+            ],
+
         ])->each(function ($collection) {
             Galeri::create($collection);
         });

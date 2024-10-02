@@ -39,7 +39,8 @@
                                             <th width="1%">No</th>
                                             <th>Kode Wilayah</th>
                                             <th>Nama Wilayah</th>
-                                            {{-- <th>Keterangan</th> --}}
+                                            <th>Jumlah Gereja</th>
+                                            <th>Jumlah Pemuda</th>
                                             <th></th>
                                         </tr>
                                         @forelse ($datas as $data)
@@ -48,10 +49,19 @@
                                                 <td class="text-dark">
                                                     {{ $data->kode_wilayah }}
                                                 </td>
-
                                                 <td class="text-dark">
                                                     {{ $data->nama_wilayah }}
                                                 </td>
+
+
+                                                <td class="text-dark">
+                                                    {{ $data->gereja->count() }}
+                                                </td>
+
+                                                <td class="text-dark">
+                                                    {{ $data->pemuda->count() }}
+                                                </td>
+
 
 
                                                 <td>

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Pengumuman;
+use Illuminate\Support\Carbon;
 
 class PengumumanSeeder extends Seeder
 {
@@ -16,13 +17,32 @@ class PengumumanSeeder extends Seeder
         collect([
             [
                 'id' => 1,
-                'judul' => 'Pengumuman 1',
-                'keterangan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam rerum dolor eius repellendus et dolorum. Dolorum aspernatur incidunt, impedit minus nemo dolore animi iure expedita, ipsam, saepe accusantium sit?',
+                'judul' => 'Selamat Hari Kenaikan TUHAN YESUS KRISTUS',
+                'keterangan' => 'BADAN PELAYAN PUSAT
+PERSEKUTUAN GEREJA-GEREJA BAPTIS PAPUA (PGBP)
+Fellowship of Bapstist Churhes of Papua
+Mengucapkan,
+
+Selamat Hari Kenaikan TUHAN YESUS KRISTUS
+Di rumah Bapa-Ku banyak tempat tinggal. Jika tidak demikian, tentu Aku mengatakannya kepadamu. Sebab Aku pergi ke situ untuk menyediakan tempat bagimu.
+
+Yohanes 14:2 TB
+TUHAN YESUS MEMBERKATI,
+Salam Dalam Satu Tuhan – Satu Iman dan Satu Baptisan
+
+BANGKIT – MANDIRI – MISIONER',
+                'mulai' => Carbon::Now(),
+                'selesai' => Carbon::Now(),
+
             ],
             [
                 'id' => 2,
-                'judul' => 'Pengumuman 2',
-                'keterangan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam rerum dolor eius repellendus et dolorum. Dolorum aspernatur incidunt, impedit minus nemo dolore animi iure expedita, ipsam, saepe accusantium sit?',
+                'judul' => 'Mision Trip Papua to Sumatera 2024',
+                'keterangan' => 'Shalom Bapak Ibu Terkasih Dalam Tuhan Yesus Kristus. Badan Pelayan Pusat Persekutuan Gereja-Gereja Baptis Papua, Wilayah Papua Barat, Bersama Dept. MISI dan PI PGBP. Baru saja melaksanakan Ibadah Peletakan Batu Pertama Pembangunan Gedung Gereja Pos PI Baptis Dame Samosir.
+
+Lokasi Peletakan Batu dilaksanakan di Desa Parbaba Dolok Kec. Pangururan, Kab. Samosir.',
+                'mulai' => Carbon::Now(),
+                'selesai' => Carbon::Now(),
             ]
         ])->each(function ($collection) {
             Pengumuman::create($collection);

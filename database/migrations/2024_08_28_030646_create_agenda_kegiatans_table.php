@@ -17,6 +17,7 @@ return new class extends Migration
             $table->mediumText('keterangan')->nullable();
             $table->timestamp('tanggal_kegiatan')->nullable();
             $table->string('status')->nullable();
+            $table->bigInteger('gereja_id')->nullable();
             $table->timestamps();
         });
     }

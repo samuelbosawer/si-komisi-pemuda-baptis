@@ -240,9 +240,7 @@
                     <div class="testimonial-item text-center rounded pb-4">
                         <div class="testimonial-comment bg-light rounded p-4">
                             <p class="text-center mb-3 fw-bolder" style="font-size: 20px"> {{$a->judul}}</p>
-                            <p class="text-center mb-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
-                                nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi
-                                porro officiis. Vero reiciendis,
+                            <p class="text-center mb-5"> {{$a->keterangan}}
                             </p>
                         </div>
                     </div>

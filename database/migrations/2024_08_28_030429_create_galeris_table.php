@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('judul');
             $table->mediumText('keterangan')->nullable();
+            $table->bigInteger('gereja_id')->nullable();
             $table->timestamps();
         });
     }
