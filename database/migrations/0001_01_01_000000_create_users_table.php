@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('name')->nullable();
             // $table->string('username')->nullable();
-            $table->bigInteger('wilayah_id')->nullable();;
-            $table->bigInteger('gereja_id')->nullable();;
+
+            $table->bigInteger('wilayah_id')->nullable();
+            $table->bigInteger('gereja_id')->nullable();
+
             // $table->string('image')->nullable();
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
