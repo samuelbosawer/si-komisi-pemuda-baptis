@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\AgendaKegiatan as Agenda;
 
 use App\Exports\PengumumanExport;
+use App\Models\Gereja;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,7 +19,7 @@ class AgendaController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Agenda::where([
+        $datas = Agenda::with('gereja')->where([
             ['judul', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -38,7 +39,8 @@ class AgendaController extends Controller
      */
     public function create()
     {
-        return view('admin.agenda.create');
+        $gereja = Gereja::get();
+        return view('admin.agenda.create',compact('gereja'));
     }
 
     /**
@@ -52,11 +54,13 @@ class AgendaController extends Controller
                 'judul' => 'required',
                 'tanggal_kegiatan' => 'required',
                 'status' => 'required',
+                // 'gereja_id' => 'required',
             ],
             [
                 'judul.required' => 'Tidak boleh kosong',
                 'tanggal_kegiatan.required' => 'Tidak boleh kosong',
                 'status.required' => 'Tidak boleh kosong',
+                // 'gereja_id.required' => 'Tidak boleh kosong',
             ]
 
         );
@@ -68,6 +72,7 @@ class AgendaController extends Controller
         $data->tanggal_kegiatan   = $request->tanggal_kegiatan;
         $data->status   = $request->status;
         $data->keterangan = $request->keterangan;
+        $data->gereja_id = $request->gereja_id ?? '';
         $data->save();
 
         alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
@@ -80,8 +85,9 @@ class AgendaController extends Controller
     public function show(string $id)
     {
         $data = Agenda::where('id', $id)->first();
+        $gereja = Gereja::get();
         $caption = 'Detail Data Agenda';
-        return view('admin.agenda.create', compact('data', 'caption'));
+        return view('admin.agenda.create', compact('data', 'caption','gereja'));
     }
 
     /**
@@ -89,9 +95,10 @@ class AgendaController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Agenda::where('id', $id)->first();
         $caption = 'Ubah Data Agenda';
-        return view('admin.agenda.create', compact('data', 'caption'));
+        $data = Agenda::where('id', $id)->first();
+        $gereja = Gereja::get();
+        return view('admin.agenda.create', compact('data', 'caption','gereja'));
     }
 
     /**
@@ -105,11 +112,13 @@ class AgendaController extends Controller
                 'judul' => 'required',
                 'tanggal_kegiatan' => 'required',
                 'status' => 'required',
+                'gereja_id' => 'required',
             ],
             [
                 'judul.required' => 'Tidak boleh kosong',
                 'tanggal_kegiatan.required' => 'Tidak boleh kosong',
                 'status.required' => 'Tidak boleh kosong',
+                'gereja_id.required' => 'Tidak boleh kosong',
             ]
 
         );
@@ -120,6 +129,7 @@ class AgendaController extends Controller
         $data->tanggal_kegiatan   = $request->tanggal_kegiatan;
         $data->status   = $request->status;
         $data->keterangan = $request->keterangan;
+        $data->gereja_id = $request->gereja_id;
         $data->update();
 
         alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
@@ -139,7 +149,7 @@ class AgendaController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Agenda::where(function ($query) use ($search) {
+        $all = Agenda::with('gereja')->where(function ($query) use ($search) {
                 $query->Where('judul', 'LIKE', '%' . $search . '%')
                     ->orWhere('keterangan', 'LIKE', '%' . $search . '%')
                     ->orWhere('tanggal_kegiatan', 'LIKE', '%' . $search . '%')

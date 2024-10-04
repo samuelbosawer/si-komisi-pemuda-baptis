@@ -37,6 +37,7 @@ class GaleriSeeder extends Seeder
                 'id' => 2,
                 'judul' => 'galeri 2',
                 'keterangan' => '',
+                'gereja_id' => 1,
             ],
             [
                 'foto' => fake()->randomElement(
@@ -48,6 +49,7 @@ class GaleriSeeder extends Seeder
                 ),
                 'judul' => 'galeri 3',
                 'keterangan' => '',
+                'gereja_id' => 3,
             ],
             [
                 'foto' => fake()->randomElement(
@@ -59,6 +61,7 @@ class GaleriSeeder extends Seeder
                 ),
                 'judul' => 'galeri 4',
                 'keterangan' => '',
+                'gereja_id' => 1,
             ],
             [
                 'foto' => fake()->randomElement(

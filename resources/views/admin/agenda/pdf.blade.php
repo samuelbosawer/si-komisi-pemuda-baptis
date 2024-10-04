@@ -35,6 +35,7 @@
                     <table class="" style="width: 100%">
                         <tr>
                             <th width="1%">No</th>
+                            <th>Gereja</th>
                             <th>Judul</th>
                             <th>Tanggal Kegiatan</th>
                             <th>Status</th>
@@ -46,6 +47,7 @@
                         @forelse ($datas as $data)
                             <tr class="text-center">
                                 <td>{{ ++$i }}</td>
+                                <td>{{ $data->gereja->nama_gereja ?? 'Semua Gereja',}}</td>
 
                                 <td>
                                     {{

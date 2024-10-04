@@ -41,7 +41,7 @@
     <!-- Spinner End -->
 
     <!-- Topbar Start -->
-    <div class="container-fluid bg-primary px-5 d-none d-lg-block">
+    <div class="container-fluid bg-primary px-5 d-none d-lg-block" id="top">
         <div class="row gx-0">
             <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
@@ -84,7 +84,7 @@
                 <div class="d-flex m-0 text-white mt-3">
                     <div class="d-flex align-items-center"> <img src="{{ asset('assets/images/logo.png') }}"srcset="">
                     </div>
-                    <h1 class="h4 fw-bold"> Sistem Informasi Pemuda Baptis Papua <br> Tingkat Wilayah Jayapura, Keerom
+                    <h1 class=" fw-bold h5 "> SI Pemuda Baptis Papua  <br >Tingkat Wilayah  Jayapura, <br> Keerom
                         dan Yahukimo</h1>
                 </div>
                 <h2 class="">
@@ -119,9 +119,9 @@
                         <img src="asset-visitor/img/carousel-2.jpg" class="img-fluid" alt="Image">
                         <div class="carousel-caption">
                             <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
+                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
+                                    Sistem Informasi Pemuda Baptis Papua</h5>
+                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
                                     dan Yahukimo
 
 
@@ -132,9 +132,9 @@
                         <img src="asset-visitor/img/carousel-1.jpg" class="img-fluid" alt="Image">
                         <div class="carousel-caption">
                             <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
+                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
+                                    Sistem Informasi Pemuda Baptis Papua</h5>
+                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
                                     dan Yahukimo
                             </div>
                         </div>
@@ -143,9 +143,9 @@
                         <img src="asset-visitor/img/carousel-3.jpg" class="img-fluid" alt="Image">
                         <div class="carousel-caption">
                             <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
+                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
+                                    Sistem Informasi Pemuda Baptis Papua</h5>
+                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
                                     dan Yahukimo
                             </div>
                         </div>
@@ -325,7 +325,7 @@
     <!-- Copyright End -->
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
+    <a href="#top" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
             class="fa fa-arrow-up"></i></a>
 
 

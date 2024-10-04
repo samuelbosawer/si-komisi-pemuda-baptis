@@ -25,7 +25,7 @@ class AgendasExport implements FromCollection, WithHeadings, WithMapping, WithSt
     */
     public function collection()
     {
-        return Agenda::where(function ($query) {
+        return Agenda::with('gereja')->where(function ($query) {
                 $query->where('judul', '!=', Null);
                 if (($s = $this->request->s)) {
                     $query->where('judul', 'LIKE', '%' . $s . '%')
@@ -42,6 +42,7 @@ class AgendasExport implements FromCollection, WithHeadings, WithMapping, WithSt
     {
         return [
             'No',
+            'Gereja',
             'Judul',
             'Tanggal Kegiatan',
             'Keterangan',
@@ -55,6 +56,7 @@ class AgendasExport implements FromCollection, WithHeadings, WithMapping, WithSt
         $no = ++$this->no;
         return [
             $no,
+            $agenda->gereja->nama_gereja ?? 'Semua Gereja',
             $agenda->judul,
             strftime('%d %B %Y', strtotime($agenda->tanggal_kegiatan)),
             $agenda->keterangan,
