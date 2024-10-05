@@ -26,7 +26,7 @@
                                     </div>
 
                                     <div class="">
-                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
+                                        @if( Auth::user()->hasRole('admin') )
 
                                         <a class="btn btn-dark" href="{{ route('admin.wilayah.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
@@ -74,11 +74,16 @@
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
+
+
+                                                    @if( Auth::user()->hasRole('admin|wilayah') )
                                                     <a href="{{ route('admin.wilayah.ubah', $data->id) }}"
                                                         class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
+                                                    @endif
+                                                    @if( Auth::user()->hasRole('admin') )
+
                                                     <form class="d-inline"
                                                         action="{{ route('admin.wilayah.hapus', $data->id) }}"
                                                         method="POST" enctype="multipart/form-data">

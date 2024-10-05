@@ -31,6 +31,13 @@ class DashboardController extends Controller
             $pemuda = Pemuda::where('gereja_id', Auth::user()->gereja_id)->count();
         }
 
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Wilayah::Where('id',Auth::user()->wilayah_id)->first();
+            $pemuda = Pemuda::count();
+
+        }
+
 
         return view('admin.dashboard.index',compact('pemuda','pria','wanita','wilayah','gereja'));
     }

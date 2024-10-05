@@ -47,6 +47,10 @@ class GaleriController extends Controller
     public function create()
     {
         $gereja = Gereja::get();
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         return view('admin.galeri.create',compact('gereja'));
     }
 
@@ -111,6 +115,10 @@ class GaleriController extends Controller
             {
              return redirect()->route('admin.galeri');
             }
+        }
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
         }
         return view('admin.galeri.create',compact('data','caption','gereja'));
     }

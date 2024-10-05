@@ -36,6 +36,12 @@ class GerejaController extends Controller
         }
 
 
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $query->where('wilayah_id', Auth::user()->wilayah_id);
+        }
+
+
         $datas = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.gereja.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }

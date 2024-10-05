@@ -8,6 +8,7 @@ use App\Models\Wilayah;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use App\Exports\WilayahExport;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,7 +19,7 @@ class WilayahController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Wilayah::where([
+        $query = Wilayah::where([
             ['nama_wilayah', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -27,7 +28,16 @@ class WilayahController extends Controller
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        ]);
+
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $query->where('id', Auth::user()->wilayah_id);
+        }
+
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.wilayah.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
@@ -36,6 +46,7 @@ class WilayahController extends Controller
      */
     public function create()
     {
+
         return view('admin.wilayah.create');
     }
 
@@ -70,6 +81,10 @@ class WilayahController extends Controller
     {
         $data = Wilayah::where('id',$id)->first();
         $caption = 'Detail Data Wilayah';
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $data = Wilayah::where('id',Auth::user()->wilayah_id)->first();
+        }
         return view('admin.wilayah.create',compact('data','caption'));
     }
 
@@ -80,6 +95,10 @@ class WilayahController extends Controller
     {
         $data = Wilayah::where('id',$id)->first();
         $caption = 'Ubah Data Wilayah';
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $data = Wilayah::where('id',Auth::user()->wilayah_id)->first();
+        }
         return view('admin.wilayah.create',compact('data','caption'));
     }
 

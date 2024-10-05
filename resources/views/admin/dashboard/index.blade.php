@@ -35,10 +35,17 @@
                                 <div class="col-6">
                                     <div class="text-right">
                                         <h3 class="text-dark mb-1">Pemuda</h3>
+                                        @if(!Auth::user()->hasRole('wilayah'))
                                         <h5 class="text-dark mb-1">Semua</h5>
+                                        @endif
 
-                                        <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{ $pemuda }}
+                                        @if(Auth::user()->hasRole('wilayah'))
+                                        <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{$pemuda }}
+                                        </span></h3>
+                                        @else
+                                                 <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{ $pemuda }}
                                             </span></h3>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -46,6 +53,7 @@
                         </div> <!-- end card-box-->
                     </div> <!-- end col -->
 
+                    @if(!Auth::user()->hasRole('wilayah'))
 
                     <div class="col-md-4">
                         <div class="card-box">
@@ -89,6 +97,10 @@
                         </div> <!-- end card-box-->
                     </div> <!-- end col -->
 
+
+                    @endif
+
+
                     <div class="col-md-4">
                         <div class="card-box">
                             <div class="row">
@@ -120,8 +132,14 @@
                                 <div class="col-6">
                                     <div class="text-right">
                                         <h3 class="text-dark mb-1">Gereja</h3>
-                                        <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{ $gereja }}
+                                        @if(Auth::user()->hasRole('wilayah'))
+                                        <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{ $gereja->gereja->count() }}
+                                        </span></h3>
+                                        @else
+                                                 <h3 class="text-dark my-1"> <span data-plugin="counterup"> {{ $gereja }}
                                             </span></h3>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
