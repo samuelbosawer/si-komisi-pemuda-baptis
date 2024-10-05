@@ -242,6 +242,9 @@
                             <p class="text-center mb-3 fw-bolder" style="font-size: 20px"> {{$a->judul}}</p>
                             <p class="text-center mb-5"> {{$a->keterangan}}
                             </p>
+
+                            <p class="text-center mb-5"> {{$a->gereja->nama_gereja ?? 'Semua Gereja'}}
+                            </p>
                         </div>
                     </div>
                 @endforeach
@@ -275,12 +278,17 @@
                                 <div class="gallery-content">
                                     <div class="gallery-info">
                                         <h5 class="text-white text-uppercase mb-2"> {{$g->judul}}</h5>
+                                        <p class="text-center mb-5 text-white"> {{$g->gereja->nama_gereja ?? 'Semua Gereja'}}
+                                        </p>
 
                                     </div>
                                 </div>
                                 <div class="gallery-plus-icon">
-                                    <a href="{{asset($g->foto)}}" data-lightbox="gallery-1"
+                                    <a href="{{asset($g->foto)}}" data-title="{{$g->keterangan}}" data-lightbox="{{$g->judul}}"
                                         class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+
+                                        {{-- <p class="text-center mb-5 text-white"> {{$g->keterangan}}
+                                        </p> --}}
                                 </div>
                             </div>
                         </div>

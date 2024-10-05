@@ -34,7 +34,7 @@ BANGKIT – MANDIRI – MISIONER',
                 'mulai' => Carbon::Now(),
                 'selesai' => Carbon::Now(),
 
-                'gereja_id' => 1,
+                // 'gereja_id' => 1,
 
             ],
             [
@@ -45,7 +45,7 @@ BANGKIT – MANDIRI – MISIONER',
 Lokasi Peletakan Batu dilaksanakan di Desa Parbaba Dolok Kec. Pangururan, Kab. Samosir.',
                 'mulai' => Carbon::Now(),
                 'selesai' => Carbon::Now(),
-                'gereja_id' => 2,
+                // 'gereja_id' => 2,
             ]
         ])->each(function ($collection) {
             Pengumuman::create($collection);

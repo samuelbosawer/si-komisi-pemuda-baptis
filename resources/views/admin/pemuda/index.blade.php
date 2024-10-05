@@ -26,7 +26,9 @@
                                     </div>
 
                                     <div class="">
+                                        @if(!Auth::user()->hasRole('wilayah'))
                                         <a class="btn btn-dark" href="{{route('admin.pemuda.tambah')}}"> Tambah Data <i data-feather="plus"></i></a>
+                                        @endif
                                         <a class="btn btn-success" href="{{route('admin.pemuda.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
                                         <a class="btn btn-danger" href="{{route('admin.pemuda.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
@@ -38,6 +40,7 @@
                                             <th width="1%">No</th>
                                             <th>Foto</th>
                                             <th>Nama</th>
+                                            <th>Usia</th>
                                             <th>Gereja</th>
                                             <th></th>
                                         </tr>
@@ -53,7 +56,9 @@
                                                     {{ $data->nama_depan .' '.$data->nama_belakang.' '.$data->belakang }}
                                                 </a>
                                             </td>
-
+                                            <td>
+                                                {{ $data->usia }}
+                                            </td>
                                             <td>
                                                 {{ $data->gereja->nama_gereja }}
                                             </td>

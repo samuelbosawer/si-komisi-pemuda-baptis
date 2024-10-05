@@ -268,7 +268,7 @@ class UserSeeder extends Seeder
 
         foreach ($wilayah as $user) {
             $newUser = User::create($user);
-            $newUser->assignRole('gereja');
+            $newUser->assignRole('wilayah');
         }
     }
 }

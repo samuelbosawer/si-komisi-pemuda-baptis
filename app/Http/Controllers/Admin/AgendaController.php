@@ -49,6 +49,10 @@ class AgendaController extends Controller
     public function create()
     {
         $gereja = Gereja::get();
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         return view('admin.agenda.create',compact('gereja'));
     }
 
@@ -103,6 +107,11 @@ class AgendaController extends Controller
             }
         }
         $gereja = Gereja::get();
+
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         $caption = 'Detail Data Agenda';
         return view('admin.agenda.create', compact('data', 'caption','gereja'));
     }
@@ -115,6 +124,10 @@ class AgendaController extends Controller
         $caption = 'Ubah Data Agenda';
         $data = Agenda::where('id', $id)->first();
         $gereja = Gereja::get();
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         return view('admin.agenda.create', compact('data', 'caption','gereja'));
     }
 

@@ -103,6 +103,10 @@ class JadwalController extends Controller
         $data = Jadwal::where('id', $id)->first();
         $caption = 'Detail Data Jadwal Jemaat';
         $gereja = Gereja::get();
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         return view('admin.jadwal.create', compact('data', 'caption','gereja'));
 
     }
@@ -115,6 +119,10 @@ class JadwalController extends Controller
         $data = Jadwal::where('id', $id)->first();
         $gereja = Gereja::get();
         $caption = 'Ubah Data Jadwal Jemaat';
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }
         return view('admin.jadwal.create', compact('data', 'caption','gereja'));
     }
 

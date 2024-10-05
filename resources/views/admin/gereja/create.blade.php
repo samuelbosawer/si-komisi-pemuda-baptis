@@ -1,6 +1,6 @@
 @extends('admin.layout.tamplate')
 @section('title')
-    Mahasiswa
+    Gereja
 @endsection
 @section('content')
     <!-- ============================================================== -->
@@ -96,9 +96,12 @@
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.gereja') }}">Kembali</a>
+                                                    @if (Auth::user()->hasRole('admin|gereja'))
+
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.gereja.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
+                                                    @endif
                                                     </div>
                                                 </div>
                                             @else

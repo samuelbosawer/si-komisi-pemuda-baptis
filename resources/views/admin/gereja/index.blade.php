@@ -76,16 +76,21 @@
 
                                                             </button>
                                                         </form>
+
+
+                                                    @endif
+
+                                                    @if (Auth::user()->hasRole('admin')|| Auth::user()->hasRole('gereja') )
+                                                    <a href="{{ route('admin.gereja.ubah', $data->id) }}"
+                                                        class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                     @endif
                                                     <a href="{{ route('admin.gereja.detail', $data->id) }}"
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
 
-                                                    <a href="{{ route('admin.gereja.ubah', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
 
                                                 </td>
 
