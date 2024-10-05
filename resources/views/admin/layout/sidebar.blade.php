@@ -69,7 +69,7 @@
                             <span> Jadwal Ibadah </span>
                         </a>
                     </li>
-
+                    @if(Auth::user()->hasRole('admin') )
                     <li class="menu-title mt-2">AKUN</li>
 
                     <li>
@@ -78,6 +78,7 @@
                             <span> Pengguna </span>
                         </a>
                     </li>
+                    @endif
 
 
                     <li class="menu-title mt-2">Logout</li>

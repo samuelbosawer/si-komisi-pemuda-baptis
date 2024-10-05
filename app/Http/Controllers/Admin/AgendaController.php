@@ -9,6 +9,7 @@ use App\Models\AgendaKegiatan as Agenda;
 
 use App\Exports\PengumumanExport;
 use App\Models\Gereja;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,7 +20,7 @@ class AgendaController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Agenda::with('gereja')->where([
+        $query = Agenda::with('gereja')->where([
             ['judul', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -30,7 +31,15 @@ class AgendaController extends Controller
                         ->get();
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        ]);
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->Where('gereja_id',null)->orWhere('gereja_id', Auth::user()->gereja_id);
+        }
+
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.agenda.index', compact('datas'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -85,6 +94,14 @@ class AgendaController extends Controller
     public function show(string $id)
     {
         $data = Agenda::where('id', $id)->first();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $data = Agenda::where('id', $id)->orWhere('id','')->where('gereja_id',Auth::user()->gereja_id)->first();
+            if(empty($data))
+            {
+             return redirect()->route('admin.agenda');
+            }
+        }
         $gereja = Gereja::get();
         $caption = 'Detail Data Agenda';
         return view('admin.agenda.create', compact('data', 'caption','gereja'));
@@ -112,13 +129,11 @@ class AgendaController extends Controller
                 'judul' => 'required',
                 'tanggal_kegiatan' => 'required',
                 'status' => 'required',
-                'gereja_id' => 'required',
             ],
             [
                 'judul.required' => 'Tidak boleh kosong',
                 'tanggal_kegiatan.required' => 'Tidak boleh kosong',
                 'status.required' => 'Tidak boleh kosong',
-                'gereja_id.required' => 'Tidak boleh kosong',
             ]
 
         );

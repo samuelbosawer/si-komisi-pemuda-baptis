@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pemuda;
 use App\Models\Wilayah;
 use App\Models\Gereja;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -14,6 +15,7 @@ class DashboardController extends Controller
 
 
         // pemuda
+
         $pria = Pemuda::where('jenis_kelamin','Laki-Laki')->count();
         $wanita = Pemuda::where('jenis_kelamin','Wanita')->count();
         $pemuda = Pemuda::count();
@@ -21,6 +23,13 @@ class DashboardController extends Controller
 
         $wilayah = Wilayah::count();
         $gereja = Gereja::count();
+
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $pria = Pemuda::where('gereja_id', Auth::user()->gereja_id)->where('jenis_kelamin','Laki-Laki')->count();
+            $wanita = Pemuda::where('gereja_id', Auth::user()->gereja_id)->where('jenis_kelamin','Wanita')->count();
+            $pemuda = Pemuda::where('gereja_id', Auth::user()->gereja_id)->count();
+        }
 
 
         return view('admin.dashboard.index',compact('pemuda','pria','wanita','wilayah','gereja'));

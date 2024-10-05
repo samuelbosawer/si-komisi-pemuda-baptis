@@ -7,6 +7,7 @@ use App\Models\Gereja;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use App\Exports\GerejaExport;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,7 +18,7 @@ class GerejaController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Gereja::where([
+        $query = Gereja::where([
             ['nama_gereja', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -27,7 +28,15 @@ class GerejaController extends Controller
                         ->get();
                 }
             }]
-            ])->orderBy('id', 'desc')->paginate(10);
+        ]);
+
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->where('id', Auth::user()->gereja_id);
+        }
+
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.gereja.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
@@ -37,6 +46,10 @@ class GerejaController extends Controller
     public function create()
     {
         $wilayah = Wilayah::get();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $wilayah = Wilayah::where('id',Auth::user()->gereja_id)->first();
+        }
         return view('admin.gereja.create',compact('wilayah'));
     }
 
@@ -79,6 +92,14 @@ class GerejaController extends Controller
     {
         $wilayah = Wilayah::get();
         $data = Gereja::where('id',$id)->first();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $data = Gereja::where('id',Auth::user()->gereja_id)->first();
+            if(empty($data))
+            {
+             return redirect()->route('admin.gereja');
+            }
+        }
         $caption = 'Detail Data Gereja';
         return view('admin.gereja.create',compact('wilayah','data','caption'));
     }
@@ -90,6 +111,14 @@ class GerejaController extends Controller
     {
         $wilayah = Wilayah::get();
         $data = Gereja::where('id',$id)->first();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $data = Gereja::where('id',Auth::user()->gereja_id)->first();
+            if(empty($data))
+            {
+             return redirect()->route('admin.gereja');
+            }
+        }
         $caption = 'Ubah Data Gereja';
         return view('admin.gereja.create',compact('wilayah','data','caption'));
     }

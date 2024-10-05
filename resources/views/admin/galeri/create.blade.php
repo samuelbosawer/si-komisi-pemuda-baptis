@@ -36,7 +36,37 @@
                                         <div class="card-box">
                                             <div class="row">
 
-                                                <div class="col-md-8">
+                                                <div class="col-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="gereja_id"> Gereja <span class="text-danger">*</span>
+                                                        </label>
+                                                        <select name="gereja_id" id="" class="form-control"
+                                                            @if (Request::segment(3) == 'detail') disabled @endif>
+                                                            <option value="" hidden> Pilih Gereja </option>
+                                                            <option value="" > Semua Gereja </option>
+                                                            @foreach ($gereja as $g)
+                                                                @if ($g->id == old('gereja_id'))
+                                                                    <option selected value="{{ $g->id }}">
+                                                                        {{ $g->nama_gereja }}</option>
+                                                                @elseif (isset($data) && $g->id == $data->gereja_id)
+                                                                    <option selected value="{{ $g->id }}">
+                                                                        {{ $g->nama_gereja }}</option>
+                                                                @else
+                                                                    <option value="{{ $g->id }}">
+                                                                        {{ $g->nama_gereja }}</option>
+                                                                @endif
+                                                            @endforeach
+
+
+                                                        </select>
+                                                        @if ($errors->has('gereja_id'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('gereja_id') }} </label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
                                                     <div class="form-group mb-3">
                                                         <label for="judul"> Judul Foto <span
                                                                 class="text-danger">*</span> </label>
@@ -116,9 +146,12 @@
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.galeri') }}">Kembali</a>
+
+                                                            @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.galeri.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
+                                                            @endif
                                                     </div>
                                                 </div>
                                             @else

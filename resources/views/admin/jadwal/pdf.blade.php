@@ -35,6 +35,7 @@
                     <table class="" style="width: 100%">
                         <tr>
                             <th width="1%">No</th>
+                            <th>Gereja</th>
                             <th>Tanggal</th>
                             <th>Tempat Ibadah</th>
                             <th>Pelayan Firman</th>
@@ -50,7 +51,7 @@
                             <tr class="text-center">
                                 <td>{{ ++$i }}</td>
 
-
+                                <td>{{$data->gereja->nama_gereja ?? 'Semua Gereja'}}</td>
                                 <td>
                                     {{
                                        strftime('%d %B %Y', strtotime($data->tanggal));

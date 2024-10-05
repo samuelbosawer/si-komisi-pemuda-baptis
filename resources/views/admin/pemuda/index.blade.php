@@ -59,11 +59,12 @@
                                             </td>
 
                                             <td>
-
                                                 <a href="{{ route('admin.pemuda.detail', $data->id) }}"
                                                     class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
+                                                @if(Auth::user()->hasRole('gereja') || Auth::user()->hasRole('admin') )
+
                                                 <a href="{{ route('admin.pemuda.ubah', $data->id) }}"
                                                     class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                     <i class="fas fa-edit"></i>
@@ -82,6 +83,7 @@
 
                                                     </button>
                                                 </form>
+                                                @endif
 
                                             </td>
 

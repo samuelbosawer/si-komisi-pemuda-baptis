@@ -84,15 +84,19 @@
 
 
 
-
                                             @if (Request::segment(3) == 'detail')
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.wilayah') }}">Kembali</a>
+
+                                            @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
+
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.wilayah.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
+                                            @endif
                                                     </div>
                                                 </div>
                                             @else

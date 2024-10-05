@@ -26,8 +26,12 @@
                                     </div>
 
                                     <div class="">
+                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
+
                                         <a class="btn btn-dark" href="{{ route('admin.wilayah.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
+                                        @endif
+
                                                 <a class="btn btn-success" href="{{route('admin.wilayah.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
                                                 <a class="btn btn-danger" href="{{route('admin.wilayah.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
@@ -70,6 +74,7 @@
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
+                                                    @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                                     <a href="{{ route('admin.wilayah.ubah', $data->id) }}"
                                                         class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                         <i class="fas fa-edit"></i>
@@ -88,6 +93,9 @@
 
                                                         </button>
                                                     </form>
+
+                                                    @endif
+
 
                                                 </td>
 

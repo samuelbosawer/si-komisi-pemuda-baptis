@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JadwalIbadah as Jadwal;
 use App\Exports\JadwalIbadahExport;
+use App\Models\Gereja;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,7 +18,7 @@ class JadwalController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Jadwal::where([
+        $query = Jadwal::with('gereja')->where([
             ['tempat_ibadah', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -30,7 +32,14 @@ class JadwalController extends Controller
                         ->get();
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        ]);
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->Where('gereja_id',null)->orWhere('gereja_id', Auth::user()->gereja_id);
+        }
+
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.jadwal.index', compact('datas'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -39,7 +48,8 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        return view('admin.jadwal.create');
+        $gereja = Gereja::get();
+        return view('admin.jadwal.create',compact('gereja'));
     }
 
     /**
@@ -78,6 +88,7 @@ class JadwalController extends Controller
         $data->status   = $request->status;
         $data->tanggal   = $request->tanggal;
         $data->keterangan = $request->keterangan;
+        $data->gereja_id = $request->gereja_id;
         $data->save();
 
         alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
@@ -91,7 +102,8 @@ class JadwalController extends Controller
     {
         $data = Jadwal::where('id', $id)->first();
         $caption = 'Detail Data Jadwal Jemaat';
-        return view('admin.jadwal.create', compact('data', 'caption'));
+        $gereja = Gereja::get();
+        return view('admin.jadwal.create', compact('data', 'caption','gereja'));
 
     }
 
@@ -101,8 +113,9 @@ class JadwalController extends Controller
     public function edit(string $id)
     {
         $data = Jadwal::where('id', $id)->first();
+        $gereja = Gereja::get();
         $caption = 'Ubah Data Jadwal Jemaat';
-        return view('admin.jadwal.create', compact('data', 'caption'));
+        return view('admin.jadwal.create', compact('data', 'caption','gereja'));
     }
 
     /**
@@ -141,6 +154,7 @@ class JadwalController extends Controller
         $data->status   = $request->status;
         $data->tanggal   = $request->tanggal;
         $data->keterangan = $request->keterangan;
+        $data->gereja_id = $request->gereja_id;
         $data->update();
 
         alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
@@ -160,7 +174,7 @@ class JadwalController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Jadwal::where(function ($query) use ($search) {
+        $all = Jadwal::with('gereja')->where(function ($query) use ($search) {
                 $query->Where('tempat_ibadah', 'LIKE', '%' . $search . '%')
                     ->orWhere('pelayan_firman', 'LIKE', '%' . $search . '%')
                     ->orWhere('doa_syafaat', 'LIKE', '%' . $search . '%')

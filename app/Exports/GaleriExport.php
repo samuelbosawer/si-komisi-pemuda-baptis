@@ -26,7 +26,7 @@ class GaleriExport implements FromCollection, WithHeadings, WithMapping, WithSty
     */
     public function collection()
     {
-        return Galeri::where(function ($query) {
+        return Galeri::with('gereja')->where(function ($query) {
                 $query->where('judul', '!=', Null);
                 if (($s = $this->request->s)) {
                     $query->where('judul', 'LIKE', '%' . $s . '%')
@@ -42,7 +42,7 @@ class GaleriExport implements FromCollection, WithHeadings, WithMapping, WithSty
     {
         return [
             'No',
-            // 'Foto',
+            'Gereja',
             'Judul',
             'Keterangan',
             'Status',
@@ -55,6 +55,7 @@ class GaleriExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $no = ++$this->no;
         return [
             $no,
+            $agenda->gereja->nama_gereja ?? 'Semua Gereja',
             $agenda->judul,
             $agenda->keterangan,
             $agenda->status,

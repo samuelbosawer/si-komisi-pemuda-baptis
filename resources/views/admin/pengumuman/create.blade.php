@@ -104,9 +104,13 @@
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.pengumuman') }}">Kembali</a>
+
+                                                            @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.pengumuman.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
+
+                                                                @endif
                                                     </div>
                                                 </div>
                                             @else

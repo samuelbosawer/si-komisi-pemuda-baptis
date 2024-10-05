@@ -10,8 +10,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 
 use App\Exports\PemudasExport;
+use App\Models\Wilayah;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class PemudaController extends Controller
 {
@@ -20,6 +22,8 @@ class PemudaController extends Controller
      */
     public function index(Request $request)
     {
+
+
         $query = Pemuda::with('gereja')->where([
             ['nama_depan', '!=', Null],
             [function ($query) use ($request) {
@@ -32,6 +36,12 @@ class PemudaController extends Controller
             }]
         ]);
 
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->where('gereja_id', Auth::user()->gereja_id);
+        }
+
+
         $datas = $query->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.pemuda.index', compact('datas'))->with('i', (request()->input('page', 1) - 1) * 10);
@@ -42,7 +52,15 @@ class PemudaController extends Controller
      */
     public function create()
     {
-        $gereja = Gereja::get();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $gereja = Gereja::where('id',Auth::user()->gereja_id)->get();
+        }elseif(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }else{
+            $gereja = Gereja::get();
+        }
         return view('admin.pemuda.create',compact('gereja'));
     }
 
@@ -116,7 +134,15 @@ class PemudaController extends Controller
      */
     public function show(string $id)
     {
-        $gereja = Gereja::get();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $gereja = Gereja::where('id',Auth::user()->gereja_id)->get();
+        }elseif(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }else{
+            $gereja = Gereja::get();
+        }
         $data = Pemuda::where('id',$id)->first();
         $caption = 'Detail Data Pemuda';
         return view('admin.pemuda.create',compact('gereja','data','caption'));
@@ -127,7 +153,15 @@ class PemudaController extends Controller
      */
     public function edit(string $id)
     {
-        $gereja = Gereja::get();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $gereja = Gereja::where('id',Auth::user()->gereja_id)->get();
+        }elseif(Auth::user()->hasRole('wilayah'))
+        {
+            $gereja = Gereja::where('wilayah_id',Auth::user()->wilayah_id)->get();
+        }else{
+            $gereja = Gereja::get();
+        }
         $data = Pemuda::where('id',$id)->first();
         $caption = 'Ubah Data Pemuda';
         return view('admin.pemuda.create',compact('gereja','data','caption'));

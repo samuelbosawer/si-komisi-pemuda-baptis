@@ -50,10 +50,10 @@
                                                     {{ $data->email }}
                                                 </td>
                                                 <td class="text-dark">
-                                                    {{ $data->wilayah->nama_wilayah ?? '' }}
+                                                    {{ $data->wilayah->nama_wilayah ?? '-' }}
                                                 </td>
                                                 <td class="text-dark">
-                                                    {{ $data->gereja->nama_gereja ?? '' }}
+                                                    {{ $data->gereja->nama_gereja ?? '-' }}
                                                 </td>
 
                                                 <td>

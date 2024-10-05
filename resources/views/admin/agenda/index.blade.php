@@ -26,8 +26,11 @@
                                     </div>
 
                                     <div class="">
+                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                         <a class="btn btn-dark" href="{{ route('admin.agenda.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
+
+                                        @endif
                                                 <a class="btn btn-success" href="{{route('admin.agenda.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
                                                 <a class="btn btn-danger" href="{{route('admin.agenda.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
@@ -67,24 +70,29 @@
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.agenda.ubah', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form class="d-inline"
-                                                        action="{{ route('admin.agenda.hapus', $data->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button
-                                                            class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
-                                                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
-                                                            type="submit">
 
-                                                            <i class="fas fa-trash"></i>
+                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
 
-                                                        </button>
-                                                    </form>
+                                        <a href="{{ route('admin.agenda.ubah', $data->id) }}"
+                                            class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form class="d-inline"
+                                            action="{{ route('admin.agenda.hapus', $data->id) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
+                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
+                                                type="submit">
+
+                                                <i class="fas fa-trash"></i>
+
+                                            </button>
+                                        </form>
+
+                                        @endif
 
                                                 </td>
 

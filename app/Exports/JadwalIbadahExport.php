@@ -25,7 +25,7 @@ class JadwalIbadahExport implements FromCollection, WithHeadings, WithMapping, W
     */
     public function collection()
     {
-        return Jadwal::where(function ($query) {
+        return Jadwal::with('gereja')->where(function ($query) {
                 $query->where('tempat_ibadah', '!=', Null);
                 if (($s = $this->request->s)) {
                     $query->where('tempat_ibadah', 'LIKE', '%' . $s . '%')
@@ -45,6 +45,7 @@ class JadwalIbadahExport implements FromCollection, WithHeadings, WithMapping, W
     {
         return [
             'No',
+            'Gereja',
             'Tanggal Ibadah',
             'Tempat Ibadah',
             'Pelayan Firman',
@@ -61,6 +62,7 @@ class JadwalIbadahExport implements FromCollection, WithHeadings, WithMapping, W
         $no = ++$this->no;
         return [
             $no,
+            $jadwal->gereja->nama_gereja ?? 'Semua Gereja',
             strftime('%d %B %Y', strtotime($jadwal->tanggal)),
             $jadwal->tempat_ibadah,
             $jadwal->pelayan_firman,

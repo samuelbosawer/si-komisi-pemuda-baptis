@@ -8,6 +8,8 @@ use App\Models\Galeri;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use App\Exports\GaleriExport;
+use App\Models\Gereja;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,7 +20,7 @@ class GaleriController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Galeri::where([
+        $query = Galeri::with('gereja')->where([
             ['judul', '!=', Null],
             ['foto', '!=', Null],
             [function ($query) use ($request) {
@@ -28,7 +30,14 @@ class GaleriController extends Controller
                         ->get();
                 }
             }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        ]);
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->Where('gereja_id',null)->orWhere('gereja_id', Auth::user()->gereja_id);
+        }
+
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.galeri.index', compact('datas'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -37,7 +46,8 @@ class GaleriController extends Controller
      */
     public function create()
     {
-        return view('admin.galeri.create');
+        $gereja = Gereja::get();
+        return view('admin.galeri.create',compact('gereja'));
     }
 
     /**
@@ -58,6 +68,7 @@ class GaleriController extends Controller
         $data = new galeri();
         $data->judul = $request->judul;
         $data->keterangan = $request->keterangan;
+        $data->gereja_id = $request->gereja_id;
 
         if (isset($request->foto)) {
 
@@ -92,7 +103,16 @@ class GaleriController extends Controller
     {
         $data = Galeri::where('id',$id)->first();
         $caption = 'Detail Data Galeri';
-        return view('admin.galeri.create',compact('data','caption'));
+        $gereja = Gereja::get();
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $data = Galeri::where('gereja_id',Auth::user()->gereja_id)->where('id',$id)->orWhere('id','')->first();
+            if(empty($data))
+            {
+             return redirect()->route('admin.galeri');
+            }
+        }
+        return view('admin.galeri.create',compact('data','caption','gereja'));
     }
 
     /**
@@ -102,7 +122,8 @@ class GaleriController extends Controller
     {
         $data = Galeri::where('id',$id)->first();
         $caption = 'Ubah Data Galeri';
-        return view('admin.galeri.create',compact('data','caption'));
+        $gereja = Gereja::get();
+        return view('admin.galeri.create',compact('data','caption','gereja'));
     }
 
     /**
@@ -121,7 +142,7 @@ class GaleriController extends Controller
         $data = galeri::find($id);
         $data->judul = $request->judul;
         $data->keterangan = $request->keterangan;
-
+        $data->gereja_id = $request->gereja_id;
         if (isset($request->foto)) {
 
 
@@ -164,7 +185,7 @@ class GaleriController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Galeri::where(function ($query) use ($search) {
+        $all = Galeri::with('gereja')->where(function ($query) use ($search) {
                 $query->Where('judul', 'LIKE', '%' . $search . '%')
                     ->orWhere('foto', 'LIKE', '%' . $search . '%')
                     ->orWhere('keterangan', 'LIKE', '%' . $search . '%');

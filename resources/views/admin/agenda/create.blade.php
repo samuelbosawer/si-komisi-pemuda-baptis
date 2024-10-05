@@ -75,6 +75,7 @@
                                                         <select name="gereja_id" id="" class="form-control"
                                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                                             <option value="" hidden> Pilih Gereja </option>
+                                                            <option value="" > Semua Gereja </option>
                                                             @foreach ($gereja as $g)
                                                                 @if ($g->id == old('gereja_id'))
                                                                     <option selected value="{{ $g->id }}">

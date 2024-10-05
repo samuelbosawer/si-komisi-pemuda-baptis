@@ -26,8 +26,10 @@
                                     </div>
 
                                     <div class="">
+                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                         <a class="btn btn-dark" href="{{ route('admin.galeri.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
+                                        @endif
                                                 <a class="btn btn-success" href="{{route('admin.galeri.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
                                                 <a class="btn btn-danger" href="{{route('admin.galeri.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
@@ -37,23 +39,23 @@
                                     <table class="table">
                                     <tr>
                                             <th width="1%">No</th>
+                                            <th>Gereja</th>
                                             <th>Judul</th>
                                             <th>Foto</th>
-                                            <th>Keterangan</th>
                                             <th></th>
                                         </tr>
                                         @forelse ($datas as $data)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td class="text-dark">
+                                                    {{ $data->gereja->nama_gereja ?? 'Semua Gereja' }}
+                                                </td>
+                                                <td class="text-dark">
                                                     {{ $data->judul }}
                                                 </td>
 
                                                 <td class="text-dark">
                                                     <img src="{{ asset($data->foto) }}" alt="Picture" class="img img-fluid p-2 w-80 m-1 rounded" width="100">
-                                                </td>
-                                                <td class="text-dark">
-                                                    {{ $data->keterangan }}
                                                 </td>
 
 
@@ -63,6 +65,7 @@
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
+                                                    @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                                     <a href="{{ route('admin.galeri.ubah', $data->id) }}"
                                                         class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                         <i class="fas fa-edit"></i>
@@ -79,6 +82,7 @@
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty

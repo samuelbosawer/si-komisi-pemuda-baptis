@@ -26,8 +26,11 @@
                                     </div>
 
                                     <div class="">
+
+                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                         <a class="btn btn-dark" href="{{ route('admin.jadwal.tambah') }}"> Tambah Data <i
                                                 data-feather="plus"></i></a>
+                                        @endif
                                                 <a class="btn btn-success" href="{{route('admin.jadwal.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
                                                 <a class="btn btn-danger" href="{{route('admin.jadwal.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
                                     </div>
@@ -37,6 +40,7 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <th width="1%">No</th>
+                                            <th>Gereja</th>
                                             <th>Tanggal</th>
                                             <th>Tempat Ibadah</th>
                                             <th>Pelayanan Firman</th>
@@ -46,6 +50,9 @@
                                         @forelse ($datas as $data)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
+                                                <td class="text-dark">
+                                                    {{ $data->gereja->nama_gereja ?? 'Semua Gereja' }}
+                                                </td>
                                                 <td>{{strftime('%d %B %Y', strtotime($data->tanggal));}}</td>
                                                 <td>{{$data->tempat_ibadah}}</td>
                                                 <td>{{$data->pelayan_firman}}</td>
@@ -56,6 +63,7 @@
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
+                                                    @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
                                                     <a href="{{ route('admin.jadwal.ubah', $data->id) }}"
                                                         class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                         <i class="fas fa-edit"></i>
@@ -74,6 +82,8 @@
 
                                                         </button>
                                                     </form>
+                                                    @endif
+
 
                                                 </td>
 
