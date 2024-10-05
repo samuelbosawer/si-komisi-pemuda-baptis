@@ -1,6 +1,6 @@
 @extends('admin.layout.tamplate')
 @section('title')
-    Mahasiswa
+    Gereja
 @endsection
 @section('content')
     <!-- ============================================================== -->
