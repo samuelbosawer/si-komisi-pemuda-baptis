@@ -24,7 +24,7 @@ class GaleriSeeder extends Seeder
                 ),
                 'id' => 1,
                 'judul' => 'galeri 1',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
             ],
             [
                 'foto' => fake()->randomElement(
@@ -36,7 +36,7 @@ class GaleriSeeder extends Seeder
                 ),
                 'id' => 2,
                 'judul' => 'galeri 2',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
                 'gereja_id' => 1,
             ],
             [
@@ -48,7 +48,7 @@ class GaleriSeeder extends Seeder
                     ]
                 ),
                 'judul' => 'galeri 3',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
                 'gereja_id' => 3,
             ],
             [
@@ -60,7 +60,7 @@ class GaleriSeeder extends Seeder
                     ]
                 ),
                 'judul' => 'galeri 4',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
                 'gereja_id' => 1,
             ],
             [
@@ -72,7 +72,7 @@ class GaleriSeeder extends Seeder
                     ]
                 ),
                 'judul' => 'galeri 5',
-                'keterangan' => '',
+                'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
             ],
             [
                 'foto' => fake()->randomElement(
@@ -83,7 +83,7 @@ class GaleriSeeder extends Seeder
                     ]
                 ),
                 'judul' => 'galeri 6',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
             ],
 
             [
@@ -95,7 +95,7 @@ class GaleriSeeder extends Seeder
                     ]
                 ),
                 'judul' => 'galeri 7',
-                'keterangan' => '',
+                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto temporibus eum doloribus, fugiat atque eligendi voluptatibus modi adipisci veniam at.',
             ],
 
         ])->each(function ($collection) {
