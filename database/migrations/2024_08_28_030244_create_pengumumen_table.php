@@ -18,6 +18,10 @@ return new class extends Migration
             $table->date('mulai')->nullable();
             $table->date('selesai')->nullable();
             $table->mediumText('keterangan')->nullable();
+
+            // relation with : wilayah, gereja
+            $table->bigInteger('gereja_id')->nullable();
+
             $table->timestamps();
         });
     }
