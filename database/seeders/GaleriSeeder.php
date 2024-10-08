@@ -43,8 +43,8 @@ class GaleriSeeder extends Seeder
                 'foto' => fake()->randomElement(
                     [
 
-                        '/gambar/galeri/4.jpg',
-                        '/gambar/galeri/3.jpg',
+                        '/gambar/galeri/2.jpg',
+                        '/gambar/galeri/1.jpg',
                     ]
                 ),
                 'judul' => 'galeri 3',
@@ -55,8 +55,8 @@ class GaleriSeeder extends Seeder
                 'foto' => fake()->randomElement(
                     [
 
-                        '/gambar/galeri/4.jpg',
-                        '/gambar/galeri/3.jpg',
+                        '/gambar/galeri/2.jpg',
+                        '/gambar/galeri/1.jpg',
                     ]
                 ),
                 'judul' => 'galeri 4',
