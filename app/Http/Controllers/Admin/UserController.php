@@ -192,7 +192,7 @@ class UserController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA PENGGUNA'];
+        $title = ['title' => 'Daftar Data Pengguna'];
         $doc = 'data-pengguna.pdf';
         $pdf = PDF::loadView('admin.pengguna.pdf', $datas, $title);
         return $pdf->download($doc);

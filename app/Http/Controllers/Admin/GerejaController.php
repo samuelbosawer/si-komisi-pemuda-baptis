@@ -183,7 +183,7 @@ class GerejaController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA GEREJA'];
+        $title = ['title' => 'Daftar Data Gereja'];
         $doc = 'data-gereja.pdf';
         $pdf = PDF::loadView('admin.gereja.pdf', $datas, $title);
         return $pdf->download($doc);

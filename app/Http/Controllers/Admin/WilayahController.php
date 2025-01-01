@@ -147,14 +147,14 @@ class WilayahController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA WILAYAH'];
+        $title = ['title' => 'Daftar Data Wilayah'];
         $doc = 'data-wilayah.pdf';
         $pdf = PDF::loadView('admin.wilayah.pdf', $datas, $title);
         return $pdf->download($doc);
 
         // $datas = Pemuda::get();
         // $title = 'DATA PEMUDA';
-        // return view('admin.pemuda.pdf',compact('datas','title'));
+        // return view('admin.wilayah.pdf',compact('datas','title'));
     }
 
     public function excel(Request $request)

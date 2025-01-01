@@ -194,7 +194,7 @@ class JadwalController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA JADWAL IBADAH'];
+        $title = ['title' => 'Daftar Data Jadwal Ibadah'];
         $doc = 'data-jadwal.pdf';
         $pdf = PDF::loadView('admin.jadwal.pdf', $datas, $title);
         return $pdf->download($doc);

@@ -57,7 +57,6 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
     {
           $no = ++$this->no;
         return [
-
             $no,
             $pemuda->nama_depan.' '.$pemuda->nama_tengah.' '.$pemuda->nama_belakang,
             $pemuda->jenis_kelamin,
