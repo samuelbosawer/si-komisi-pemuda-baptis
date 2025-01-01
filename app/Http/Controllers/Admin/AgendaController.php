@@ -187,7 +187,7 @@ class AgendaController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA AGENDA KEGIATAN'];
+        $title = ['title' => 'Daftar Data Agenda Kegiatan'];
         $doc = 'data-agenda.pdf';
         $pdf = PDF::loadView('admin.agenda.pdf', $datas, $title);
         return $pdf->download($doc);

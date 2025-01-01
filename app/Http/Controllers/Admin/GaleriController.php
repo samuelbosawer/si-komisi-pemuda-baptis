@@ -202,7 +202,7 @@ class GaleriController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA GALERI'];
+        $title = ['title' => 'Daftar Data Galeri'];
         $doc = 'data-galeri.pdf';
         $pdf = PDF::loadView('admin.galeri.pdf', $datas, $title);
         return $pdf->download($doc);

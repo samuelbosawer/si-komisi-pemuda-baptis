@@ -143,7 +143,7 @@ class PengumumanController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA PENGUMUMAN'];
+        $title = ['title' => 'Daftar Data Pengumuman'];
         $doc = 'data-pengumuman.pdf';
         $pdf = PDF::loadView('admin.pengumuman.pdf', $datas, $title);
         return $pdf->download($doc);

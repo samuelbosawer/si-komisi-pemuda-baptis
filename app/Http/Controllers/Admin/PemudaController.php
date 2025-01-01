@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Exports\PemudasExport;
 use App\Models\Wilayah;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -257,13 +258,14 @@ class PemudaController extends Controller
             ->get();
 
         $datas = ['datas' => $all];
-        $title = ['title' => 'DATA PEMUDA'];
+        $title = ['title' => 'Daftar Data Pemuda'];
         $doc = 'data-pemuda.pdf';
-        $pdf = PDF::loadView('admin.pemuda.pdf', $datas, $title);
+        $pdf = FacadePdf::loadView('admin.pemuda.pdf', $datas, $title);
+        // return $pdf->stream($doc);
         return $pdf->download($doc);
 
         // $datas = Pemuda::get();
-        // $title = 'DATA PEMUDA';
+        // $title = 'Daftar Data Pemuda';
         // return view('admin.pemuda.pdf',compact('datas','title'));
     }
 
