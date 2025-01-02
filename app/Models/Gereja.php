@@ -19,4 +19,9 @@ class Gereja extends Model
     {
         return $this->hasMany(Pemuda::class, 'gereja_id','id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'gereja_id');
+    }
 }

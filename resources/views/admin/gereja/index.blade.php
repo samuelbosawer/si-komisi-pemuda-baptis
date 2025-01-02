@@ -114,6 +114,15 @@
                                                             <i class="fas fa-eye"></i>
                                                         </a>
 
+                                                        @if (Auth::user()->hasRole('admin'))
+                                                            @if (auth()->user()->hasPermissionTo('access-other-users'))
+                                                                <a href="{{ route('admin.impersonate.start', $data->user->id) }}"
+                                                                    class="btn btn-sm btn-outline-success border-0  waves-effect waves-light fs-4">
+                                                                    <i class="fas fa-universal-access"></i></a>
+                                                            @endif
+                                                        @endif
+
+
 
                                                     </td>
 
