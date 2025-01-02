@@ -8,6 +8,7 @@ use App\Models\Wilayah;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use App\Exports\WilayahExport;
+use App\Models\Gereja;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -33,6 +34,12 @@ class WilayahController extends Controller
         if(Auth::user()->hasRole('wilayah'))
         {
             $query->where('id', Auth::user()->wilayah_id);
+        }
+
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $id = Gereja::where('id',Auth::user()->gereja_id)->first();
+            $query->where('id', $id->wilayah_id);
         }
 
 
@@ -138,13 +145,26 @@ class WilayahController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Wilayah::where(function ($query) use ($search) {
+        $query = Wilayah::where(function ($query) use ($search) {
                 $query->Where('nama_wilayah', 'LIKE', '%' . $search . '%')
                     ->orWhere('kode_wilayah', 'LIKE', '%' . $search . '%')
                     ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
             })
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
+
+            if(Auth::user()->hasRole('wilayah'))
+            {
+                $query->where('id', Auth::user()->wilayah_id);
+            }
+
+            if(Auth::user()->hasRole('gereja'))
+            {
+                $id = Gereja::where('id',Auth::user()->gereja_id)->first();
+                $query->where('id', $id->wilayah_id);
+            }
+
+
+            $all = $query->get();
 
         $datas = ['datas' => $all];
         $title = ['title' => 'Daftar Data Wilayah'];

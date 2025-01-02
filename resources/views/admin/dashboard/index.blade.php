@@ -53,7 +53,7 @@
                         </div> <!-- end card-box-->
                     </div> <!-- end col -->
 
-                    @if(!Auth::user()->hasRole('wilayah'))
+
 
                     <div class="col-md-4">
                         <div class="card-box">
@@ -98,8 +98,8 @@
                     </div> <!-- end col -->
 
 
-                    @endif
 
+                    @if(!Auth::user()->hasRole('wilayah|gereja'))
 
                     <div class="col-md-4">
                         <div class="card-box">
@@ -120,7 +120,11 @@
 
                         </div> <!-- end card-box-->
                     </div> <!-- end col -->
+                    @endif;
 
+
+
+                    @if(!Auth::user()->hasRole('gereja'))
                     <div class="col-md-4">
                         <div class="card-box">
                             <div class="row">
@@ -146,6 +150,7 @@
 
                         </div> <!-- end card-box-->
                     </div> <!-- end col -->
+                    @endif;
 
 
                 </div>

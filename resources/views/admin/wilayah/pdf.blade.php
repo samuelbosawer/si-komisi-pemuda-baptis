@@ -39,6 +39,8 @@
                             <th width="1%">No</th>
                             <th>Nama Wilayah</th>
                             <th>Kode Wilayah</th>
+                            <th>Jumlah Pemuda</th>
+                            <th>Jumlah Gereja</th>
                             <th>Keterangan</th>
                         </tr>
                         @php
@@ -56,6 +58,20 @@
                                 <td>
                                     {{
                                         $data->kode_wilayah
+                                    }}
+                                </td>
+
+
+                                <td>
+                                    {{
+                                        $data->gereja->count()
+                                    }}
+                                </td>
+
+
+                                <td>
+                                    {{
+                                        $data->pemuda->count()
                                     }}
                                 </td>
 
