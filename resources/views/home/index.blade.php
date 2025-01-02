@@ -236,7 +236,7 @@
                 <div class="col-lg-12">
                     <div class="row g-4">
                         @foreach ($pengumuman as $p)
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="service-content-inner  bg-white border border-primary rounded p-4 pe-0">
                                     <div class="service-content text-center">
                                         <h5 class="mb-4">{{ $p->judul }}</h5>
@@ -268,10 +268,11 @@
                 <h5 class="section-title px-3">Agenda</h5>
                 <h1 class="mb-0">Agenda Kegiatan</h1>
             </div>
-            <div class="testimonial-carousel owl-carousel">
+            <br>
+            <div class="testimonial-carousel owl-carousel ">
 
                 @foreach ($agenda as $a )
-                    <div class="testimonial-item text-center rounded pb-4">
+                    <div class="testimonial-item text-center rounded pb-4 mt-4">
                         <div class="testimonial-comment bg-light rounded p-4">
                             <p class="text-center mb-3 fw-bolder" style="font-size: 20px"> {{$a->judul}}</p>
                             <p class="text-center mb-5"> {{$a->keterangan}}
