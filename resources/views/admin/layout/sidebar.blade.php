@@ -92,6 +92,16 @@
                      </li>
 
 
+                     @if (session()->has('impersonate') AND !Auth::user()->hasRole('admin'))
+                     <li>
+                     <a href="{{ route('admin.impersonate.stop') }}">
+                        <i data-feather="user"></i>
+                        <span> Admin </span>
+                    </a>
+                </li>
+                     @endif
+
+
                  </ul>
 
              </div>

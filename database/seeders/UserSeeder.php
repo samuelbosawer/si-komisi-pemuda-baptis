@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+
         $admin = User::create([
             // 'user' => 'Admin',
             'name' => 'Admin',
@@ -21,7 +25,8 @@ class UserSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
-
+        Permission::create(['name' => 'access-other-users']);
+        $admin->givePermissionTo('access-other-users');
 
         $gereja = [
             [

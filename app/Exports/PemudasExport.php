@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithStyles
 {
@@ -23,7 +24,7 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
     public function collection()
     {
 
-           return Pemuda::with('gereja')->whereHas('gereja')
+          $query =  Pemuda::with('gereja')->whereHas('gereja')
             ->where(function ($query) {
                 $query->where('nama_depan', '!=', Null);
                 if (($s = $this->request->s)) {
@@ -33,8 +34,23 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
                         ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%');
                 }
             })
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
+            if(Auth::user()->hasRole('gereja'))
+            {
+                $query->where('gereja_id', Auth::user()->gereja_id);
+            }
+            if(Auth::user()->hasRole('wilayah'))
+            {
+                $query->whereHas('gereja', function($query) {
+                    $query->whereHas('wilayah', function($subQuery) {
+                        $subQuery->where('id', Auth::user()->wilayah_id);
+                    });
+                });
+            }
+
+
+
+            return $query->get();
     }
 
     public function headings(): array

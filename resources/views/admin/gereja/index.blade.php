@@ -21,9 +21,11 @@
                             <div class="card-body">
                                 <h4 class="header-title"> Data Gereja</h4>
                                 <div class="row mt-3 d-flex justify-content-between">
-                                    <div class="col-6">
-                                        @include('admin.layout.search')
-                                    </div>
+                                    @if (!Auth::user()->hasRole('gereja'))
+                                        <div class="col-6">
+                                            @include('admin.layout.search')
+                                        </div>
+                                    @endif
 
                                     <div class="">
                                         @if (Auth::user()->hasRole('admin'))
@@ -39,75 +41,107 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-3 table-responsive">
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <th width="1%">No</th>
-                                            <th>Nama Gereja</th>
-                                            <th>Wilayah</th>
-                                            <th>Jumlah Pemuda</th>
-                                            <th></th>
-                                        </tr>
-                                        @forelse ($datas as $data)
+
+                                @if (Auth::user()->hasRole('gereja'))
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 p-4 shadow">
+                                            <table>
+                                                <tr>
+                                                    <td width="200">Nama Gereja</td>
+                                                    <th>{{ $datas[0]->nama_gereja }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wilayah</td>
+                                                    <th>{{ $datas[0]->wilayah->nama_wilayah }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jumlah Pemuda</td>
+                                                    <th>{{ $datas[0]->pemuda->count() }}</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if (Auth::user()->hasRole('wilayah|admin'))
+                                    <div class="mt-3 table-responsive">
+                                        <table class="table table-bordered">
                                             <tr>
-                                                <td>{{ ++$i }}</td>
-                                                <td>{{ $data->nama_gereja }}</td>
-                                                <td>
-                                                    {{ $data->wilayah->nama_wilayah }}
-                                                </td>
-
-                                                <td>
-                                                    {{ $data->pemuda->count() }}
-                                                </td>
-
-                                                <td>
-                                                    @if (Auth::user()->hasRole('admin'))
-                                                        <form class="d-inline"
-                                                            action="{{ route('admin.gereja.hapus', $data->id) }}"
-                                                            method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
-                                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
-                                                                type="submit">
-
-                                                                <i class="fas fa-trash"></i>
-
-                                                            </button>
-                                                        </form>
-
-
-                                                    @endif
-
-                                                    @if (Auth::user()->hasRole('admin')|| Auth::user()->hasRole('gereja') )
-                                                    <a href="{{ route('admin.gereja.ubah', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    @endif
-                                                    <a href="{{ route('admin.gereja.detail', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-
-
-                                                </td>
-
+                                                <th width="1%">No</th>
+                                                <th>Nama Gereja</th>
+                                                <th>Wilayah</th>
+                                                <th>Jumlah Pemuda</th>
+                                                <th></th>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="7">
-                                                    No data . . .
-                                                </td>
-                                            </tr>
-                                        @endforelse
+                                            @forelse ($datas as $data)
+                                                <tr>
+                                                    <td>{{ ++$i }}</td>
+                                                    <td>{{ $data->nama_gereja }}</td>
+                                                    <td>
+                                                        {{ $data->wilayah->nama_wilayah }}
+                                                    </td>
+
+                                                    <td>
+                                                        {{ $data->pemuda->count() }}
+                                                    </td>
+
+                                                    <td>
+                                                        @if (Auth::user()->hasRole('admin'))
+                                                            <form class="d-inline"
+                                                                action="{{ route('admin.gereja.hapus', $data->id) }}"
+                                                                method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
+                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
+                                                                    type="submit">
+
+                                                                    <i class="fas fa-trash"></i>
+
+                                                                </button>
+                                                            </form>
+                                                        @endif
+
+                                                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('gereja'))
+                                                            <a href="{{ route('admin.gereja.ubah', $data->id) }}"
+                                                                class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        @endif
+                                                        <a href="{{ route('admin.gereja.detail', $data->id) }}"
+                                                            class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+
+                                                        @if (Auth::user()->hasRole('admin'))
+                                                            @if (auth()->user()->hasPermissionTo('access-other-users'))
+                                                                <a href="{{ route('admin.impersonate.start', $data->user->id) }}"
+                                                                    class="btn btn-sm btn-outline-success border-0  waves-effect waves-light fs-4">
+                                                                    <i class="fas fa-universal-access"></i></a>
+                                                            @endif
+                                                        @endif
 
 
-                                    </table>
-                                </div>
-                                <!-- end .mt-4 -->
-                                {!! $datas->appends(['s' => request()->s])->links() !!}
+
+                                                    </td>
+
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="7">
+                                                        No data . . .
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+
+
+                                        </table>
+                                    </div>
+                                    <!-- end .mt-4 -->
+                                    {!! $datas->appends(['s' => request()->s])->links() !!}
+                                @endif
+
 
 
                             </div> <!-- end card-body-->

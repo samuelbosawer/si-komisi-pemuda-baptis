@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Gereja;
 use App\Models\Wilayah;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -9,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WilayahExport implements FromCollection, WithHeadings, WithMapping, WithStyles
 {
@@ -25,16 +27,31 @@ class WilayahExport implements FromCollection, WithHeadings, WithMapping, WithSt
     */
     public function collection()
     {
-        return Wilayah::where(function ($query) {
+         $query = Wilayah::where(function ($query) {
                 $query->where('nama_wilayah', '!=', Null);
                 if (($s = $this->request->s)) {
                     $query->where('nama_wilayah', 'LIKE', '%' . $s . '%')
                         ->orWhere('kode_wilayah', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
                 }
-            })
-            ->orderBy('id', 'desc')
-            ->get();
+            });
+
+
+            if(Auth::user()->hasRole('wilayah'))
+            {
+                $query->where('id', Auth::user()->wilayah_id);
+            }
+
+            if(Auth::user()->hasRole('gereja'))
+            {
+                $id = Gereja::where('id',Auth::user()->gereja_id)->first();
+                $query->where('id', $id->wilayah_id);
+            }
+
+
+
+            return $query->orderBy('id', 'desc')->get();
+
     }
 
     public function headings(): array
@@ -43,6 +60,8 @@ class WilayahExport implements FromCollection, WithHeadings, WithMapping, WithSt
             'No',
             'Nama Wilayah',
             'Kode Wilayah',
+            'Jumlah Gereja',
+            'Jumlah Pemuda',
             'Keterangan',
         ];
     }
@@ -55,6 +74,8 @@ class WilayahExport implements FromCollection, WithHeadings, WithMapping, WithSt
             $no,
             $wilayah->nama_wilayah,
             $wilayah->kode_wilayah,
+            $wilayah->gereja->count(),
+            $wilayah->pemuda->count(),
             $wilayah->keterangan,
         ];
     }

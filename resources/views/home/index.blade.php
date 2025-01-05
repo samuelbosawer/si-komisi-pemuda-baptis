@@ -170,6 +170,9 @@
     <!-- About Start -->
     <div class="container-fluid about py-5" id="tentang">
         <div class="container py-5">
+
+
+
             <div class="row g-5 align-items-center">
                 <div class="col-lg-5">
                     <div class="h-100"
@@ -187,6 +190,37 @@
                         gereja dengan lebih efisien. </p>
                 </div>
             </div>
+
+            <div class="row mt-5 d-flex justify-content-center">
+                <div class="col-md-3 m-2">
+
+                   <div class="shadow p-3 text-center rounded">
+                        <h4>Wilayah<i class="fas fa-cross"></i></i></h4>
+                        <p>Jumlah wilayah {{$wilayah}}</p>
+                   </div>
+
+                </div>
+
+                <div class="col-md-3 m-2">
+
+                    <div class="shadow p-3 text-center rounded">
+                         <h4>Gereja <i class="fas fa-church"></i></i></h4>
+                         <p>Jumlah Gereja {{$gereja}}</p>
+                    </div>
+
+                 </div>
+
+                 <div class="col-md-3 m-2">
+
+                    <div class="shadow p-3 text-center rounded">
+                         <h4>Pemuda <i class="fas fa-users"></i></i></h4>
+                         <p>Jumlah Pemuda {{$pemuda}}</p>
+                    </div>
+
+                 </div>
+            </div>
+
+
         </div>
     </div>
     <!-- About End -->
@@ -202,7 +236,7 @@
                 <div class="col-lg-12">
                     <div class="row g-4">
                         @foreach ($pengumuman as $p)
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="service-content-inner  bg-white border border-primary rounded p-4 pe-0">
                                     <div class="service-content text-center">
                                         <h5 class="mb-4">{{ $p->judul }}</h5>
@@ -234,10 +268,11 @@
                 <h5 class="section-title px-3">Agenda</h5>
                 <h1 class="mb-0">Agenda Kegiatan</h1>
             </div>
-            <div class="testimonial-carousel owl-carousel">
+            <br>
+            <div class="testimonial-carousel owl-carousel ">
 
                 @foreach ($agenda as $a )
-                    <div class="testimonial-item text-center rounded pb-4">
+                    <div class="testimonial-item text-center rounded pb-4 mt-4">
                         <div class="testimonial-comment bg-light rounded p-4">
                             <p class="text-center mb-3 fw-bolder" style="font-size: 20px"> {{$a->judul}}</p>
                             <p class="text-center mb-5"> {{$a->keterangan}}

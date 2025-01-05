@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GerejaExport implements FromCollection, WithHeadings, WithMapping, WithStyles
 {
@@ -25,16 +26,29 @@ class GerejaExport implements FromCollection, WithHeadings, WithMapping, WithSty
     */
     public function collection()
     {
-        return Gereja::where(function ($query) {
+       $query = Gereja::where(function ($query) {
                 $query->where('nama_gereja', '!=', Null);
                 if (($s = $this->request->s)) {
                     $query->where('nama_gereja', 'LIKE', '%' . $s . '%')
                         ->orWhere('alamat', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%');
                 }
-            })
-            ->orderBy('id', 'desc')
-            ->get();
+            });
+
+            if(Auth::user()->hasRole('gereja'))
+            {
+                $query->where('id', Auth::user()->gereja_id);
+            };
+
+
+            if(Auth::user()->hasRole('wilayah'))
+            {
+                $query->where('wilayah_id', Auth::user()->wilayah_id);
+            };
+
+
+            return  $query->orderBy('id', 'desc')->get();
+
     }
 
     public function headings(): array

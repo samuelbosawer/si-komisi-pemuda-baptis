@@ -34,7 +34,22 @@ class DashboardController extends Controller
         if(Auth::user()->hasRole('wilayah'))
         {
             $gereja = Wilayah::Where('id',Auth::user()->wilayah_id)->first();
-            $pemuda = Pemuda::count();
+            $pemuda = Pemuda::whereHas('gereja', function($query) {
+                $query->whereHas('wilayah', function($subQuery) {
+                    $subQuery->where('id', Auth::user()->wilayah_id);
+                });
+            })->count();
+
+            $pria = Pemuda::whereHas('gereja', function($query) {
+                $query->whereHas('wilayah', function($subQuery) {
+                    $subQuery->where('id', Auth::user()->wilayah_id);
+                });
+            })->where('jenis_kelamin','Laki-Laki')->count();
+            $wanita = Pemuda::whereHas('gereja', function($query) {
+                $query->whereHas('wilayah', function($subQuery) {
+                    $subQuery->where('id', Auth::user()->wilayah_id);
+                });
+            })->where('jenis_kelamin','Wanita')->count();
 
         }
 

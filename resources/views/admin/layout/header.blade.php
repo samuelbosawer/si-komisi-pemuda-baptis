@@ -85,6 +85,11 @@
                                 @csrf
                             </form>
 
+                            @if (session()->has('impersonate') AND !Auth::user()->hasRole('admin'))
+                                <a class="dropdown-item" href="{{ route('admin.impersonate.stop') }}">  <i class="fe-user"></i>
+                                {{ __('Admin') }}
+                            @endif
+                        </a>
                         </div>
                     </li>
 

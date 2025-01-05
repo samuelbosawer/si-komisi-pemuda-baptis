@@ -41,6 +41,16 @@ class PemudaController extends Controller
         {
             $query->where('gereja_id', Auth::user()->gereja_id);
         }
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $query->whereHas('gereja', function($query) {
+                $query->whereHas('wilayah', function($subQuery) {
+                    $subQuery->where('id', Auth::user()->wilayah_id);
+                });
+            });
+        }
+
+
 
 
         $datas = $query->orderBy('id', 'desc')->paginate(10);
@@ -247,15 +257,30 @@ class PemudaController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Pemuda::with('gereja')->whereHas('gereja')
+        $query = Pemuda::with('gereja')->whereHas('gereja')
             ->where(function ($query) use ($search) {
                 $query->Where('nama_depan', 'LIKE', '%' . $search . '%')
                     ->orWhere('nama_tengah', 'LIKE', '%' . $search . '%')
                     ->orWhere('nama_belakang', 'LIKE', '%' . $search . '%')
                     ->orWhere('nomor_hp', 'LIKE', '%' . $search . '%');
             })
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
+
+
+        if(Auth::user()->hasRole('gereja'))
+        {
+            $query->where('gereja_id', Auth::user()->gereja_id);
+        }
+        if(Auth::user()->hasRole('wilayah'))
+        {
+            $query->whereHas('gereja', function($query) {
+                $query->whereHas('wilayah', function($subQuery) {
+                    $subQuery->where('id', Auth::user()->wilayah_id);
+                });
+            });
+        }
+
+        $all = $query->get();
 
         $datas = ['datas' => $all];
         $title = ['title' => 'Daftar Data Pemuda'];

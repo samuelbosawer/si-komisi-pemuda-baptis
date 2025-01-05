@@ -174,13 +174,25 @@ class GerejaController extends Controller
     public function pdf(Request $request)
     {
         $search = $request->s;
-        $all = Gereja::where(function ($query) use ($search) {
+        $query = Gereja::where(function ($query) use ($search) {
                 $query->Where('nama_gereja', 'LIKE', '%' . $search . '%')
                     ->orWhere('alamat', 'LIKE', '%' . $search . '%')
                     ->orWhere('keterangan', 'LIKE', '%' . $search . '%');
             })
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
+
+            if(Auth::user()->hasRole('gereja'))
+            {
+                $query->where('id', Auth::user()->gereja_id);
+            }
+
+
+            if(Auth::user()->hasRole('wilayah'))
+            {
+                $query->where('wilayah_id', Auth::user()->wilayah_id);
+            }
+
+            $all = $query->get();
 
         $datas = ['datas' => $all];
         $title = ['title' => 'Daftar Data Gereja'];

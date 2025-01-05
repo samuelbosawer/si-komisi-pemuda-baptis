@@ -19,4 +19,9 @@ class Wilayah extends Model
     {
         return $this->hasManyThrough(Pemuda::class, Gereja::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'wilayah_id');
+    }
 }
