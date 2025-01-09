@@ -105,6 +105,37 @@
                                                         @endif
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="angkatan"> Angkatan  <span
+                                                                class="text-danger">*</span> </label>
+                                                        <select name="angkatan" id="" class="form-control"
+                                                            @if (Request::segment(3) == 'detail') disabled @endif>
+                                                            <option value="" hidden> Pilih Angkatan </option>
+                                                            @for ($i = 2010; $i < 2030 ; $i++)
+
+
+                                                                @if (isset($data) && $i == $data->angkatan)
+                                                                    <option selected value="{{ $i }}">
+                                                                        {{ $i  }}</option>
+                                                                @else
+                                                                    <option value="{{ $i }}">
+                                                                        {{ $i  }}</option>
+                                                                @endif
+                                                            @endfor
+
+                                                        </select>
+                                                        @if ($errors->has('angkatan'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('angkatan') }} </label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+
+
                                                 <div class="col-4">
                                                     <div class="form-group mb-3">
                                                         <label for="gereja_id"> Gereja <span class="text-danger">*</span>
@@ -196,7 +227,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-8">
+                                                <div class="col-md-10">
                                                     <div class="form-group mb-3">
                                                         <label for="alamat"> Alamat </label>
                                                         <textarea id="alamat" @if (Request::segment(3) == 'detail') disabled @endif name="alamat"

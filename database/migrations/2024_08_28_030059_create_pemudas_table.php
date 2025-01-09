@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('usia')->nullable();
             $table->string('alamat')->nullable();
             $table->string('foto')->nullable();
+            $table->string('angkatan')->nullable();
 
             // relation with : wilayah, gereja
             $table->bigInteger('gereja_id')->nullable();

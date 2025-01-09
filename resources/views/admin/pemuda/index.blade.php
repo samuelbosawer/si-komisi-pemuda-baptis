@@ -42,6 +42,7 @@
                                             <th>Nama</th>
                                             <th>Usia</th>
                                             <th>Gereja</th>
+                                            <th>Angkatan</th>
                                             <th></th>
                                         </tr>
                                         @forelse ($datas as $data)
@@ -61,6 +62,10 @@
                                             </td>
                                             <td>
                                                 {{ $data->gereja->nama_gereja }}
+                                            </td>
+
+                                            <td>
+                                                {{ $data->angkatan }}
                                             </td>
 
                                             <td>
