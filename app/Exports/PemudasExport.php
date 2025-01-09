@@ -28,10 +28,17 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
             ->where(function ($query) {
                 $query->where('nama_depan', '!=', Null);
                 if (($s = $this->request->s)) {
-                    $query->where('nama_depan', 'LIKE', '%' . $s . '%')
-                        ->orWhere('nama_tengah', 'LIKE', '%' . $s . '%')
-                        ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%')
-                        ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%');
+                    $query->orWhere('nama_depan', 'LIKE', '%' . $s . '%')
+                    ->orWhere('nama_tengah', 'LIKE', '%' . $s . '%')
+                    ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%')
+                    ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                    ->orWhere('jenis_kelamin', 'LIKE', '%' . $s . '%')
+                    ->orWhere('tempat_lahir', 'LIKE', '%' . $s . '%')
+                    ->orWhere('tanggal_lahir', 'LIKE', '%' . $s . '%')
+                    ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                    ->orWhere('usia', 'LIKE', '%' . $s . '%')
+                    ->orWhere('alamat', 'LIKE', '%' . $s . '%')
+                    ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
                 }
             })
             ->orderBy('id', 'desc');

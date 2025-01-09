@@ -2,7 +2,7 @@
     <table border="0" style="width: 100%; border-spacing: 0; border: 0px;">
         <tr>
             <td rowspan="6" style="width: 80px; text-align: center;">
-                <img src="{{public_path('/assets/images/logo.png')}}" alt="Logo" style="width: 100px; height: auto;">
+                <img src="{{public_path('/assets/images/dinas.png')}}" alt="Logo" style="width: 100px; height: auto;">
             </td>
             <td style="font-size: 16px; font-weight: bold; text-align: center;">Persekutuan Gereja-Gereja Baptis Papua (PGBP)</td>
         </tr>

@@ -32,7 +32,14 @@ class PemudaController extends Controller
                     $query->orWhere('nama_depan', 'LIKE', '%' . $s . '%')
                         ->orWhere('nama_tengah', 'LIKE', '%' . $s . '%')
                         ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%')
-                        ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%');
+                        ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                        ->orWhere('jenis_kelamin', 'LIKE', '%' . $s . '%')
+                        ->orWhere('tempat_lahir', 'LIKE', '%' . $s . '%')
+                        ->orWhere('tanggal_lahir', 'LIKE', '%' . $s . '%')
+                        ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                        ->orWhere('usia', 'LIKE', '%' . $s . '%')
+                        ->orWhere('alamat', 'LIKE', '%' . $s . '%')
+                        ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
                 }
             }]
         ]);
@@ -86,6 +93,7 @@ class PemudaController extends Controller
             'gereja_id' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'angkatan' => 'required',
             'nomor_hp' => 'required|unique:pemudas,nomor_hp',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
@@ -98,6 +106,7 @@ class PemudaController extends Controller
             'nomor_hp.required' => 'Tidak boleh kosong',
             'nomor_hp.unique' => 'Sudah terdaftar',
             'foto.required' => 'Tidak boleh kosong',
+            'angkatan.required' => 'Tidak boleh kosong',
         ]
         );
         $data = new Pemuda();
@@ -112,6 +121,7 @@ class PemudaController extends Controller
         $data->nomor_hp   = $request->nomor_hp;
         $data->usia   = $request->usia;
         $data->alamat   = $request->alamat;
+        $data->angkatan   = $request->angkatan;
 
           // picture creation
     if (isset($request->foto)) {
@@ -190,6 +200,8 @@ class PemudaController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'nomor_hp' => 'required',
+            'angkatan' => 'required',
+
             // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
         [
@@ -200,6 +212,7 @@ class PemudaController extends Controller
             'tanggal_lahir.required' => 'Tidak boleh kosong',
             'nomor_hp.required' => 'Tidak boleh kosong',
             'nomor_hp.unique' => 'Sudah terdaftar',
+            'angkatan.unique' => 'Sudah terdaftar',
             // 'foto.required' => 'Tidak boleh kosong',
         ]
         );
@@ -214,6 +227,7 @@ class PemudaController extends Controller
         $data->nomor_hp   = $request->nomor_hp;
         $data->usia   = $request->usia;
         $data->alamat   = $request->alamat;
+        $data->angkatan   = $request->angkatan;
 
           // picture creation
     if (isset($request->foto)) {
@@ -256,13 +270,20 @@ class PemudaController extends Controller
 
     public function pdf(Request $request)
     {
-        $search = $request->s;
+        $s = $request->s;
         $query = Pemuda::with('gereja')->whereHas('gereja')
-            ->where(function ($query) use ($search) {
-                $query->Where('nama_depan', 'LIKE', '%' . $search . '%')
-                    ->orWhere('nama_tengah', 'LIKE', '%' . $search . '%')
-                    ->orWhere('nama_belakang', 'LIKE', '%' . $search . '%')
-                    ->orWhere('nomor_hp', 'LIKE', '%' . $search . '%');
+            ->where(function ($query) use ($s) {
+                $query->orWhere('nama_depan', 'LIKE', '%' . $s . '%')
+                ->orWhere('nama_tengah', 'LIKE', '%' . $s . '%')
+                ->orWhere('nama_belakang', 'LIKE', '%' . $s . '%')
+                ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                ->orWhere('jenis_kelamin', 'LIKE', '%' . $s . '%')
+                ->orWhere('tempat_lahir', 'LIKE', '%' . $s . '%')
+                ->orWhere('tanggal_lahir', 'LIKE', '%' . $s . '%')
+                ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
+                ->orWhere('usia', 'LIKE', '%' . $s . '%')
+                ->orWhere('alamat', 'LIKE', '%' . $s . '%')
+                ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
             })
             ->orderBy('id', 'desc');
 
