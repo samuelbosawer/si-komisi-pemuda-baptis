@@ -307,8 +307,8 @@ class PemudaController extends Controller
         $title = ['title' => 'Daftar Data Pemuda'];
         $doc = 'data-pemuda.pdf';
         $pdf = FacadePdf::loadView('admin.pemuda.pdf', $datas, $title);
-        // return $pdf->stream($doc);
-        return $pdf->download($doc);
+        return $pdf->stream($doc);
+        // return $pdf->download($doc);
 
         // $datas = Pemuda::get();
         // $title = 'Daftar Data Pemuda';

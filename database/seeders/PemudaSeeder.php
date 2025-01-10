@@ -35,6 +35,7 @@ class PemudaSeeder extends Seeder
                     // 'foto' => 'foto/korius.png',
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 [
                     'nama_depan' => 'Ana',
@@ -54,6 +55,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
 
@@ -71,6 +73,7 @@ class PemudaSeeder extends Seeder
                     // 'foto' => 'foto/korius.png',
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 [
                     'nama_depan' => 'Martha',
@@ -90,6 +93,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
                 /*
@@ -407,6 +411,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -930,6 +935,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -954,6 +960,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -978,6 +985,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -1002,6 +1010,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
                 /*
@@ -1027,6 +1036,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
                 /*
@@ -1052,6 +1062,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
                 /*
@@ -1077,6 +1088,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
                 /*
@@ -1125,6 +1137,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -1149,6 +1162,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -1173,6 +1187,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 /*
                 | ============================================================
@@ -1197,6 +1212,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
                 [
                     'nama_depan' => 'Anis',
@@ -1216,6 +1232,7 @@ class PemudaSeeder extends Seeder
                     ),
                     'gereja_id' => 1,
                     'angkatan' => "2024",
+                    'tempat_lahir' => "Jayapura",
                 ],
 
 
