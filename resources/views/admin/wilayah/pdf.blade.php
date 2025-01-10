@@ -100,6 +100,9 @@
                 </div>
             </div>
         </div>
+
+        @include('admin.layout.pdf.tdd')
+
     </div>
 </body>
 

@@ -96,6 +96,10 @@
                     </table>
                 </div>
             </div>
+
+
+        @include('admin.layout.pdf.tdd')
+
         </div>
     </div>
 </body>

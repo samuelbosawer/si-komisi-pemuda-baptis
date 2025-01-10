@@ -43,6 +43,7 @@
                             <th>TTL</th>
                             <th>Nomor HP</th>
                             <th>Usia</th>
+                            <th>Tahun Angkatan</th>
                             <th>Alamat</th>
                             <th>Gereja</th>
                         </tr>
@@ -89,6 +90,11 @@
                                     }}
                                 </td>
 
+                                <td>
+                                    {{ $data->angkatan }}
+                                </td>
+
+
 
                                 <td>
                                     {{
@@ -100,6 +106,7 @@
                                 <td>
                                     {{ $data->gereja->nama_gereja }}
                                 </td>
+
 
 
                             </tr>
@@ -114,6 +121,8 @@
 
                     </table>
                 </div>
+                @include('admin.layout.pdf.tdd')
+
             </div>
         </div>
     </div>
