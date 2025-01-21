@@ -6,7 +6,7 @@
             <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
+            <div class="carousel-item ">
                 <img src="asset-visitor/img/carousel-2.jpg" class="img-fluid" alt="Image">
                 <div class="carousel-caption">
                     <div class="p-3" style="max-width: 900px;">
@@ -14,12 +14,10 @@
                             Sistem Informasi Pemuda Baptis Papua</h5>
                         <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
                             dan Yahukimo
-
-
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item active">
                 <img src="asset-visitor/img/carousel-1.jpg" class="img-fluid" alt="Image">
                 <div class="carousel-caption">
                     <div class="p-3" style="max-width: 900px;">
