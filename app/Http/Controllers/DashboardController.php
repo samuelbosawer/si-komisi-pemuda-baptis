@@ -22,7 +22,9 @@ class DashboardController extends Controller
 
 
         $wilayah = Wilayah::count();
+        $wilayahs = Wilayah::get();
         $gereja = Gereja::count();
+        $gerejas = Gereja::get();
 
         if(Auth::user()->hasRole('gereja'))
         {
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         if(Auth::user()->hasRole('wilayah'))
         {
             $gereja = Wilayah::Where('id',Auth::user()->wilayah_id)->first();
+            $gerejas = Wilayah::with('gereja')->where('id',Auth::user()->wilayah_id)->get();
             $pemuda = Pemuda::whereHas('gereja', function($query) {
                 $query->whereHas('wilayah', function($subQuery) {
                     $subQuery->where('id', Auth::user()->wilayah_id);
@@ -54,7 +57,7 @@ class DashboardController extends Controller
         }
 
 
-        return view('admin.dashboard.index',compact('pemuda','pria','wanita','wilayah','gereja'));
+        return view('admin.dashboard.index',compact('pemuda','pria','wanita','wilayah','gereja','wilayahs','gerejas'));
     }
 
 
