@@ -14,16 +14,9 @@
 
 
         <div class="row g-5 align-items-center">
-            <div class="col-lg-5">
-                <div class="h-100"
-                    style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
-                    <img src="asset-visitor/img/about-img.jpg" class="img-fluid w-100 h-100" alt="">
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <h5 class="section-about-title pe-3">Tentang Kami</h5>
+            <div class="col-lg-12 text-center ">
                 <h1 class="mb-4">Welcome to <span class="text-primary">SI Pemuda Baptis Papua</span></h1>
-                <p class="mb-4 bg-primary p-3 rounded text-white">Sistem Informasi Pemuda Baptis Papua Tingkat
+                <p class="mb-4 bg-primary p-3 rounded text-white shadow">Sistem Informasi Pemuda Baptis Papua Tingkat
                     Wilayah Jayapura, Keerom, dan Yahukimo adalah sebuah platform digital yang dirancang untuk
                     mendukung pengelolaan data dan aktivitas Pemuda Baptis di tiga wilayah tersebut. Sistem ini
                     bertujuan untuk memudahkan pemantauan kegiatan, komunikasi, serta administrasi organisasi pemuda
