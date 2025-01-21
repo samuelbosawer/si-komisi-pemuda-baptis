@@ -9,6 +9,10 @@ use App\Http\Controllers\HomeController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/tentang-kami', [HomeController::class, 'tentang'])->name('tentang');
+Route::get('/pengumuman', [HomeController::class, 'pengumuman'])->name('pengumuman');
+Route::get('/agenda', [HomeController::class, 'agenda'])->name('agenda');
+Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 
 
 Auth::routes();
