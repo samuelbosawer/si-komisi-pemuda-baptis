@@ -39,10 +39,15 @@ class PemudaController extends Controller
                         ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
                         ->orWhere('usia', 'LIKE', '%' . $s . '%')
                         ->orWhere('alamat', 'LIKE', '%' . $s . '%')
-                        ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
+                        ->orWhere('angkatan', 'LIKE', '%' . $s . '%')
+                        ->orWhere('nik', 'LIKE', '%' . $s . '%');
                 }
             }]
-        ]);
+        ])->when($request->s, function ($query) use ($request) {
+            $query->orWhereHas('gereja', function ($query) use ($request) {
+                $query->where('nama_gereja', 'LIKE', '%' . $request->s . '%');
+            });
+        });
 
         if(Auth::user()->hasRole('gereja'))
         {
@@ -96,6 +101,8 @@ class PemudaController extends Controller
             'angkatan' => 'required',
             'nomor_hp' => 'required|unique:pemudas,nomor_hp',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nik' => 'required|unique:pemudas,nik',
+            'usia' => 'max:25|min:16|integer',
         ],
         [
             'nama_depan.required' => 'Tidak boleh kosong',
@@ -107,6 +114,11 @@ class PemudaController extends Controller
             'nomor_hp.unique' => 'Sudah terdaftar',
             'foto.required' => 'Tidak boleh kosong',
             'angkatan.required' => 'Tidak boleh kosong',
+            'angkatan.unique' => 'Sudah terdaftar',
+            'usia.max' => 'Usia terlalu tua',
+            'usia.min' => 'Usia terlalu mudah',
+            'usia.integer' => 'Harus angka',
+
         ]
         );
         $data = new Pemuda();
@@ -122,6 +134,8 @@ class PemudaController extends Controller
         $data->usia   = $request->usia;
         $data->alamat   = $request->alamat;
         $data->angkatan   = $request->angkatan;
+        $data->nik = $request->nik;
+
 
           // picture creation
     if (isset($request->foto)) {
@@ -201,6 +215,8 @@ class PemudaController extends Controller
             'tanggal_lahir' => 'required',
             'nomor_hp' => 'required',
             'angkatan' => 'required',
+            'usia' => 'max:25|min:16|integer',
+            // 'nik' => 'required|unique:pemudas,nik',
 
             // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
@@ -213,6 +229,9 @@ class PemudaController extends Controller
             'nomor_hp.required' => 'Tidak boleh kosong',
             'nomor_hp.unique' => 'Sudah terdaftar',
             'angkatan.unique' => 'Sudah terdaftar',
+            'usia.max' => 'Usia terlalu tua',
+            'usia.min' => 'Usia terlalu mudah',
+            'usia.integer' => 'Harus angka',
             // 'foto.required' => 'Tidak boleh kosong',
         ]
         );
@@ -285,7 +304,11 @@ class PemudaController extends Controller
                 ->orWhere('alamat', 'LIKE', '%' . $s . '%')
                 ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
             })
-            ->orderBy('id', 'desc');
+            ->orderBy('id', 'desc')->when($request->s, function ($query) use ($request) {
+                $query->orWhereHas('gereja', function ($query) use ($request) {
+                    $query->where('nama_gereja', 'LIKE', '%' . $request->s . '%');
+                });
+            });
 
 
         if(Auth::user()->hasRole('gereja'))

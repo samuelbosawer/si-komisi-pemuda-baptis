@@ -6,9 +6,11 @@ use App\Models\Pengumuman;
 use App\Models\AgendaKegiatan as Agenda;
 use App\Models\Galeri;
 use App\Models\Gereja;
+use App\Models\JadwalIbadah;
 use App\Models\Pemuda;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -53,5 +55,27 @@ class HomeController extends Controller
 
         $galeri = Galeri::orderBy('id', 'desc')->paginate(5);
         return view('home.pages.galeri',compact('galeri'));
+    }
+
+    public function jadwal(Request $request)
+    {
+        $query = JadwalIbadah::with('gereja')->where([
+            ['tempat_ibadah', '!=', Null],
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('tempat_ibadah', 'LIKE', '%' . $s . '%')
+                        ->orWhere('pelayan_firman', 'LIKE', '%' . $s . '%')
+                        ->orWhere('doa_syafaat', 'LIKE', '%' . $s . '%')
+                        ->orWhere('doa_syukur', 'LIKE', '%' . $s . '%')
+                        ->orWhere('status', 'LIKE', '%' . $s . '%')
+                        ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
+                        ->orWhere('tanggal', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ]);
+
+        $datas = $query->orderBy('id', 'desc')->paginate(10);
+        return view('home.pages.jadwal',compact('datas'));
     }
 }

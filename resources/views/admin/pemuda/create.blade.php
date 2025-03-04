@@ -84,6 +84,21 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-4">
+                                                    <div class="form-group mb-3">
+                                                        <label for="nik"> NIK <span class="text-danger"> *
+                                                            </span> </label>
+                                                        <input type="text" id="nik"
+                                                            @if (Request::segment(3) == 'detail' OR Request::segment(4) == 'ubah') {{ 'disabled' }} @endif
+                                                            value="{{ old('nik') ?? ($data->nik ?? '') }}"
+                                                            name="nik" placeholder="" class="form-control">
+                                                        @if ($errors->has('nik'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('nik') }} </label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-4">
                                                     <div class="form-group mb-3">
                                                         <label for="jenis_kelamin"> Jenis Kelamin <span

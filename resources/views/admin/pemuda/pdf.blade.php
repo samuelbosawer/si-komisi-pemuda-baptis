@@ -39,6 +39,7 @@
                             <th width="1%">No</th>
                             {{-- <th>Foto</th> --}}
                             <th>Nama</th>
+                            <th>NIK</th>
                             <th>Jenis Kelamin</th>
                             <th>TTL</th>
                             <th>Nomor HP</th>
@@ -61,7 +62,11 @@
 
                                         {{ $data->nama_depan . ' ' . $data->nama_belakang . ' ' . $data->belakang }}
                                 </td>
-
+                                <td>
+                                    {{
+                                        $data->nik
+                                    }}
+                                </td>
                                 <td>
                                     {{
                                         $data->jenis_kelamin

@@ -132,8 +132,8 @@
                                                         <select name="status" id="" class="form-control"
                                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                                             <option value="" hidden> Pilih Status</option>
-                                                            <option @if (old('status') == 'Aktif' || (isset($data) && $data->status == 'Aktif')) {{ 'selected' }} @endif value="Aktif"> Aktif</option>
-                                                            <option @if (old('status') == 'Tidak Aktif' || (isset($data) && $data->status == 'Tidak Aktif')) {{ 'selected' }} @endif value="Tidak Aktif"> Tidak Aktif</option>
+                                                            <option @if (old('status') == 'Terlaksana' || (isset($data) && $data->status == 'Terlaksana')) {{ 'selected' }} @endif value="Terlaksana"> Terlaksana</option>
+                                                            <option @if (old('status') == 'Tidak Terlaksana' || (isset($data) && $data->status == 'Tidak Terlaksana')) {{ 'selected' }} @endif value="Tidak Terlaksana"> Tidak Terlaksana</option>
                                                         </select>
                                                         @if ($errors->has('status'))
                                                             <label class="text-danger"> {{ $errors->first('status') }}

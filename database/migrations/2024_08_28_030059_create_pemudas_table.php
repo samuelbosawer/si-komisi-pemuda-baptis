@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_depan');
             $table->string('nama_tengah')->nullable();
             $table->string('nama_belakang')->nullable();
+            $table->string('nik')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->string('tanggal_lahir')->nullable();

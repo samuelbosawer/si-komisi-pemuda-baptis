@@ -38,7 +38,8 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
                     ->orWhere('nomor_hp', 'LIKE', '%' . $s . '%')
                     ->orWhere('usia', 'LIKE', '%' . $s . '%')
                     ->orWhere('alamat', 'LIKE', '%' . $s . '%')
-                    ->orWhere('angkatan', 'LIKE', '%' . $s . '%');
+                    ->orWhere('angkatan', 'LIKE', '%' . $s . '%')
+                    ->orWhere('nik', 'LIKE', '%' . $s . '%');
                 }
             })
             ->orderBy('id', 'desc');
@@ -65,6 +66,7 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
         return [
             'No',
             'Nama',
+            'NIK',
             'Jenis Kelamin',
             'TTL',
             'No HP',
@@ -82,6 +84,7 @@ class PemudasExport implements FromCollection, WithHeadings, WithMapping, WithSt
         return [
             $no,
             $pemuda->nama_depan.' '.$pemuda->nama_tengah.' '.$pemuda->nama_belakang,
+            $pemuda->nik,
             $pemuda->jenis_kelamin,
             $pemuda->tempat_lahir.' '.strftime('%d %B %Y', strtotime($pemuda->tanggal_lahir)),
             $pemuda->no_hp,
