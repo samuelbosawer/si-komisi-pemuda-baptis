@@ -27,12 +27,16 @@
 
                                     <div class="">
 
-                                        @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
-                                        <a class="btn btn-dark" href="{{ route('admin.jadwal.tambah') }}"> Tambah Data <i
-                                                data-feather="plus"></i></a>
+                                        @if (Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin'))
+                                            <a class="btn btn-dark" href="{{ route('admin.jadwal.tambah') }}"> Tambah Data
+                                                <i data-feather="plus"></i></a>
                                         @endif
-                                                <a class="btn btn-success" href="{{route('admin.jadwal.excel','s='.request()->s)}}">Cetak Excel <i data-feather="printer"></i></a>
-                                                <a class="btn btn-danger" href="{{route('admin.jadwal.pdf','s='.request()->s ?? '')}}">Cetak PDF <i data-feather="printer"></i></a>
+                                        <a class="btn btn-success"
+                                            href="{{ route('admin.jadwal.excel', 's=' . request()->s) }}">Cetak Excel <i
+                                                data-feather="printer"></i></a>
+                                        <a class="btn btn-danger"
+                                            href="{{ route('admin.jadwal.pdf', 's=' . request()->s ?? '') }}">Cetak PDF <i
+                                                data-feather="printer"></i></a>
                                     </div>
                                 </div>
 
@@ -44,6 +48,8 @@
                                             <th>Tanggal</th>
                                             <th>Tempat Ibadah</th>
                                             <th>Pelayanan Firman</th>
+                                            <th>Doa Syukur </th>
+                                            <th>Doa Syafaat</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
@@ -53,35 +59,37 @@
                                                 <td class="text-dark">
                                                     {{ $data->gereja->nama_gereja ?? 'Semua Gereja' }}
                                                 </td>
-                                                <td>{{strftime('%d %B %Y', strtotime($data->tanggal));}}</td>
-                                                <td>{{$data->tempat_ibadah}}</td>
-                                                <td>{{$data->pelayan_firman}}</td>
-                                                <td>{{$data->status}}</td>
+                                                <td>{{ strftime('%d %B %Y', strtotime($data->tanggal)) }}</td>
+                                                <td>{{ $data->tempat_ibadah }}</td>
+                                                <td>{{ $data->pelayan_firman }}</td>
+                                                <td>{{ $data->doa_syukur }}</td>
+                                                <td>{{ $data->doa_syafaat }}</td>
+                                                <td>{{ $data->status }}</td>
 
                                                 <td>
                                                     <a href="{{ route('admin.jadwal.detail', $data->id) }}"
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    @if(Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin') )
-                                                    <a href="{{ route('admin.jadwal.ubah', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form class="d-inline"
-                                                        action="{{ route('admin.jadwal.hapus', $data->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button
-                                                            class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
-                                                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
-                                                            type="submit">
+                                                    @if (Auth::user()->hasRole('wilayah') || Auth::user()->hasRole('admin'))
+                                                        <a href="{{ route('admin.jadwal.ubah', $data->id) }}"
+                                                            class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <form class="d-inline"
+                                                            action="{{ route('admin.jadwal.hapus', $data->id) }}"
+                                                            method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button
+                                                                class="btn btn-sm btn-outline-danger border-0 waves-effect waves-light fs-4"
+                                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
+                                                                type="submit">
 
-                                                            <i class="fas fa-trash"></i>
+                                                                <i class="fas fa-trash"></i>
 
-                                                        </button>
-                                                    </form>
+                                                            </button>
+                                                        </form>
                                                     @endif
 
 
