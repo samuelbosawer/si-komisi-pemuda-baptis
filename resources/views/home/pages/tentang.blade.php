@@ -75,6 +75,7 @@
     </div>
 </div>
 <!-- About End -->
+    @endsection
 
 
 

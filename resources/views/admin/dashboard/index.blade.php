@@ -143,6 +143,7 @@
                                                 <th>Kode Wilayah</th>
                                                 <th>Nama Wilayah</th>
                                             </tr>
+
                                             @foreach ($wilayahs as $w )
                                             <tr>
                                                 <td>{{$w->kode_wilayah}}</td>

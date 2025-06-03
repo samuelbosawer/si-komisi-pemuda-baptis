@@ -30,9 +30,9 @@
         <div class="tab-class text-center">
 
             <div class="tab-content">
-                <div id="" class="tab-pane fade show p-0 active">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-10">
+                <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-2 container">
+                        <div class="col-12 mx-auto d-flex justify-content-center">
                             <div class="mt-3 table-responsive">
                                 <table class="table table-bordered">
                                     <tr>
@@ -50,8 +50,8 @@
 
                                     @forelse ($datas as $data)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
-                                            <td class="">
+                                            <td>{{ ++$i }}</td>
+                                            <td class="text-dark">
                                                 {{ $data->gereja->nama_gereja ?? 'Semua Gereja' }}
                                             </td>
                                             <td>{{ strftime('%d %B %Y', strtotime($data->tanggal)) }}</td>
@@ -86,5 +86,3 @@
         </div>
     </div>
     <!-- Gallery End -->
-
-    @endsection

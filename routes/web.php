@@ -13,7 +13,7 @@ Route::get('/tentang-kami', [HomeController::class, 'tentang'])->name('tentang')
 Route::get('/pengumuman', [HomeController::class, 'pengumuman'])->name('pengumuman');
 Route::get('/agenda', [HomeController::class, 'agenda'])->name('agenda');
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
-Route::get('/jadwal-ibadah', [HomeController::class, 'jadwal'])->name('jadwal');
+Route::get('/jadwal', [HomeController::class, 'jadwal'])->name('jadwal');
 
 
 Auth::routes();

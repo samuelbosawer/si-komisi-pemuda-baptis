@@ -58,8 +58,8 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="/" class="nav-item nav-link ">Beranda</a>
-                <a href="{{route('tentang')}}" class="nav-item nav-link">Tentang Kami</a>
-                <a href="{{route('jadwal')}}" class="nav-item nav-link">Jadwal Ibadah</a>
+                <a href="{{route('tentang')}}" class="nav-item nav-link">Tentang </a>
+                <a href="{{route('jadwal')}}" class="nav-item nav-link">Jadwal</a>
                 <a href="{{route('pengumuman')}}" class="nav-item nav-link">Pengumuman</a>
                 <a href="{{route('agenda')}}" class="nav-item nav-link">Agenda</a>
                 <a href="{{route('galeri')}}" class="nav-item nav-link">Galeri</a>

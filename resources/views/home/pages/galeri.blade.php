@@ -64,3 +64,4 @@
 </div>
 <!-- Gallery End -->
 
+    @endsection
