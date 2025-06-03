@@ -41,8 +41,8 @@
                                         <th>Tanggal</th>
                                         <th>Tempat Ibadah</th>
                                         <th>Pelayanan Firman</th>
-                                        <th>Doa_Syukur</th>
-                                        <th>Doa_Syafaat</th>
+                                        <th>Doa Syukur</th>
+                                        <th>Doa Syafaat</th>
                                     </tr>
                                         @php
                                             $i = 1;
