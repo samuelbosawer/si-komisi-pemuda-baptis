@@ -34,15 +34,15 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-10">
                             <div class="mt-3 table-responsive">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th width="1%">No</th>
-                                        <th>Gereja</th>
-                                        <th>Tanggal</th>
-                                        <th>Tempat Ibadah</th>
-                                        <th>Pelayanan Firman</th>
-                                        <th>Doa Syukur</th>
-                                        <th>Doa Syafaat</th>
+                                <table class="table table-bordered table table-hover table-striped">
+                                    <tr class="ng">
+                                        <th class="table-primary" width="1%">No</th>
+                                        <th class="table-primary">Gereja</th>
+                                        <th class="table-primary">Tanggal</th>
+                                        <th class="table-primary">Tempat Ibadah</th>
+                                        <th class="table-primary">Pelayanan Firman</th>
+                                        <th class="table-primary">Doa Syukur</th>
+                                        <th class="table-primary">Doa Syafaat</th>
                                     </tr>
                                         @php
                                             $i = 1;
