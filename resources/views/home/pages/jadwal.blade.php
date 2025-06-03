@@ -34,7 +34,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-10">
                             <div class="mt-3 table-responsive">
-                                <table class="table table-bordered table table-hover table-striped">
+                                <table class="table table-bordered  table-hover table-striped">
                                     <tr class="ng">
                                         <th class="table-primary" width="1%">No</th>
                                         <th class="table-primary">Gereja</th>
