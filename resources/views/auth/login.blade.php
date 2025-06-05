@@ -8,9 +8,8 @@
         <meta content="{{asset($pengaturan->desk_web ?? '')}}" name="description" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset($pengaturan->nav ?? '')}}">
 
-
+    <link rel="shortcut icon" href="{{asset('asset-visitor/img/icon.png') }}">
 		<!-- App css -->
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
 		<link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />

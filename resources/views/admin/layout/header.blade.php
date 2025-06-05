@@ -9,7 +9,7 @@
     <meta content="Sistem Informasi Pendataan Mahasiswa" name="description" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="{{asset('asset-visitor/img/icon.png') }}">
 
     <!-- plugin css -->
     <link href="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
