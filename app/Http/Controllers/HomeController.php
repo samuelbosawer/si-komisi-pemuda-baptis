@@ -59,7 +59,7 @@ class HomeController extends Controller
 
     public function jadwal(Request $request)
     {
-        $query = JadwalIbadah::with('gereja')->where('status','Aktif')->where([
+        $query = JadwalIbadah::with('gereja')->where([
             ['tempat_ibadah', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {

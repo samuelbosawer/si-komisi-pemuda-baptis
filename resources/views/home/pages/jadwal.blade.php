@@ -43,6 +43,7 @@
                                         <th class="table-primary">Pelayanan Firman</th>
                                         <th class="table-primary">Doa Syukur</th>
                                         <th class="table-primary">Doa Syafaat</th>
+                                        <th class="table-primary">Status</th>
                                     </tr>
                                         @php
                                             $i = 1;
@@ -59,6 +60,7 @@
                                             <td>{{ $data->pelayan_firman }}</td>
                                             <td>{{ $data->doa_syukur }}</td>
                                             <td>{{ $data->doa_syafaat }}</td>
+                                            <td>{{ $data->status }}</td>
 
 
                                         </tr>

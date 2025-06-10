@@ -23,7 +23,7 @@ class JadwalIbadahSeeder extends Seeder
                     'pelayan_firman' => 'Ev. Yokiles Wandik.S.Th.',
                     'doa_syukur' => 'Ev. Binias Wandik.S.Th.',
                     'doa_syafaat' => 'Ev. Yohanan wakerkwa.S.Th.',
-                    'status' => 'Aktif',
+                    'status' => 'Terlaksana',
                     'tanggal' => Carbon::now(),
 
 
@@ -35,7 +35,7 @@ class JadwalIbadahSeeder extends Seeder
                     'pelayan_firman' => 'Ev. Yenius Wainmbo.Dip Th.',
                     'doa_syukur' => 'Ev. Binias Wandik.S.Th.',
                     'doa_syafaat' => 'Ev. Kulok Yigibalom.S.Th. ',
-                    'status' => 'Aktif',
+                    'status' => 'Tidak Terlaksana',
                     'tanggal' => Carbon::now(),
 
 
